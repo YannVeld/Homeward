@@ -3,38 +3,29 @@ require("Sprites")
 require("Fonts")
 require("src/GameStates")
 
-initialGameState = gamestates.menu
-
---local gameWidth, gameHeight = 1080, 720
+-- Initialization variables
+local initialGameState = gamestates.menu
 local gameWidth, gameHeight = 320, 180
 local windowToGameScale = 4
 
 function love.load()
-    love.math.setRandomSeed(love.timer.getTime())
-    math.randomseed(love.timer.getTime())
-
-    local windowWidth, windowHeight = gameWidth * windowToGameScale, gameHeight * windowToGameScale
-    Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, pixelperfect = false, resizable=false})
-    
-    --local windowWidth, windowHeight = love.window.getDesktopDimensions()
-    --Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = true})
-
-    -- Set default font
+    SetupRandomSeed()
+    SetupScreen()
+    Shack:setDimensions(Push:getDimensions())
     love.graphics.setFont(Fonts.m3x6)
-
     camera = Camera()
-    Gamestate.registerEvents()
-    Gamestate.switch(initialGameState)
-
+    InitializeGameState()
 end
 
 function love.update(dt)
+    Shack:update(dt)
     InstanceManager.update(dt)
     Timer.update(dt)
 end
 
 function love.draw()
     Push:start()
+    Shack:apply()
     camera:attach()
     InstanceManager.draw()
     camera:detach()
@@ -42,3 +33,20 @@ function love.draw()
     Push:finish()
 end
 
+
+function SetupRandomSeed()
+    love.math.setRandomSeed(love.timer.getTime())
+    math.randomseed(love.timer.getTime())
+end
+
+function SetupScreen()
+    local windowWidth, windowHeight = gameWidth * windowToGameScale, gameHeight * windowToGameScale
+    Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, pixelperfect = false, resizable=false})
+    --local windowWidth, windowHeight = love.window.getDesktopDimensions()
+    --Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = true})
+end
+
+function InitializeGameState()
+    Gamestate.registerEvents()
+    Gamestate.switch(initialGameState)
+end

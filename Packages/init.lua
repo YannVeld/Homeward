@@ -9,5 +9,7 @@ Camera = require "Packages/hump/camera"
 
 Lume = require "Packages/lume/lume"
 
+Shack = require "Packages/shack/shack"
+
 require "Packages/YannUtil/InstanceManager"
 require "Packages/YannUtil/Instance"

@@ -12,6 +12,7 @@ Ball = Class{
     initAngle = 0.15*math.pi,
     extraPlayerHeight = 10,
     sprite = Sprites.yellowCircle,
+    pointShakeIntensity = 5,
 
     init = function(self, player1, player2)
         Instance.init(self)
@@ -113,6 +114,7 @@ Ball = Class{
         end
 
         Signal.emit("score", playerid)
+        Shack:setShake(Ball.pointShakeIntensity)
         self:resetPositionAndVelocity()
     end,
 }
