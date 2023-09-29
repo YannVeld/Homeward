@@ -1,5 +1,6 @@
 require("Packages")
 require("Sprites")
+require("Fonts")
 require("src/GameStates")
 
 initialGameState = gamestates.menu
@@ -18,9 +19,13 @@ function love.load()
     --local windowWidth, windowHeight = love.window.getDesktopDimensions()
     --Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = true})
 
+    -- Set default font
+    love.graphics.setFont(Fonts.m3x6)
+
     camera = Camera()
     Gamestate.registerEvents()
     Gamestate.switch(initialGameState)
+
 end
 
 function love.update(dt)

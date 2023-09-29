@@ -31,7 +31,7 @@ UIElement = Class{
 
     setText = function(self, text, opts)
         if opts and opts.font then
-            self.font = font
+            self.font = opts.font
         end
 
         self.text = love.graphics.newText(self.font, text)
