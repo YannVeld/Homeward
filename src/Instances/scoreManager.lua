@@ -16,9 +16,10 @@ ScoreManager = Class{
 
     draw = function(self)
         local dist = 100
-        local centery = love.graphics.getHeight() / 2
+        local centery = Push:getHeight() / 2
+
         love.graphics.print(self.scores[1], dist, centery)
-        love.graphics.print(self.scores[2], love.graphics.getWidth() - dist, centery)
+        love.graphics.print(self.scores[2], Push:getWidth() - dist, centery)
     end,
 
     gainscore = function(self, playerid)

@@ -109,7 +109,7 @@ Ball = Class{
 
     hitSideWalls = function(self)
         local playerid = 1
-        if self.position.x < love.graphics.getWidth() / 2 then
+        if self.position.x < Push:getWidth() / 2 then
             playerid = 2
         end
 
