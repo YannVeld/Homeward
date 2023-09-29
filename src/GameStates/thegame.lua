@@ -2,9 +2,6 @@ require("src/Instances/scoreManager")
 require("src/Instances/player")
 require("src/Instances/ball")
 
-if not gamestates then
-    gamestates = {}
-end
 gamestates.thegame = {}
 
 function gamestates.thegame:enter()

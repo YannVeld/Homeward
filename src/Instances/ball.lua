@@ -9,6 +9,7 @@ Ball = Class{
     angleRandomChangeOnBat = 0.01*math.pi,
     initAngle = 0.15*math.pi,
     extraPlayerHeight = 10,
+    sprite = Sprites.yellowCircle,
 
     edgedown = love.graphics.getHeight(),
     edgeup = 0,
@@ -29,7 +30,7 @@ Ball = Class{
     end,
 
     draw = function(self)
-        love.graphics.circle("fill", self.position.x, self.position.y, Ball.radius)
+        love.graphics.draw(self.sprite, self.position.x - self.sprite:getWidth()/2, self.position.y - self.sprite:getHeight() / 2)
     end,
 
     resetPositionAndVelocity = function(self)

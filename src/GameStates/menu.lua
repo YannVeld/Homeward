@@ -1,9 +1,5 @@
 require("Packages/UI")
 
-if not gamestates then
-    gamestates = {}
-end
-
 gamestates.menu = {}
 
 function gamestates.menu:draw()

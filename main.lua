@@ -1,4 +1,5 @@
 require("Packages")
+require("Sprites")
 require("src/GameStates")
 
 initialGameState = gamestates.menu
