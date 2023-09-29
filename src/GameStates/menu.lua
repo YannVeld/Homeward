@@ -23,6 +23,8 @@ function gamestates.menu:enter()
     myButton:setText("Start", {color=Colors.black, ha="center", va="center"})
     myButton:setOnButtonReleased(function() Gamestate.switch(gamestates.thegame) end)
     myButton:setBackgroundColors(Colors.white, Colors.gray, Colors.snow)
+    myButton:setBackgroundSprite(Sprites.brownBlock, true)
+    myButton:setSizeToSpriteSize()
 
     myButton = Button(Vector(centerx-buttonwidth/2,centery+buttonheight*1.5-buttonheight/2), buttonwidth, buttonheight)
     myButton:setText("Quit", {color=Colors.black, ha="center", va="center"})

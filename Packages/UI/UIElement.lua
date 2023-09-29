@@ -13,6 +13,9 @@ UIElement = Class{
         self.backgroundcolor = Colors.white
         self.backgroundvisible = true
 
+        self.backgroundsprite = nil
+        self.scalebackgroundsprite = false
+
         -- Text settings
         self.font = love.graphics.getFont()
         self.text = love.graphics.newText(self.font, "")
@@ -27,6 +30,24 @@ UIElement = Class{
 
     setBackgroundVisibility = function(self, visibility)
         self.backgroundvisible = visibility
+    end,
+
+    setBackgroundSprite = function(self, sprite, doscaling)
+        self.backgroundsprite = sprite
+        if doscaling then
+            self.scalebackgroundsprite = doscaling
+        end
+        self:setBackgroundVisibility(false)
+    end,
+
+    setSizeToSpriteSize = function(self)
+        if not self.backgroundsprite then
+            print("WARNING: Cannot scale UIElement because background sprite is not set")
+            return
+        end
+
+        self.width = self.backgroundsprite:getWidth()
+        self.height = self.backgroundsprite:getHeight()
     end,
 
     setText = function(self, text, opts)
@@ -95,6 +116,19 @@ UIElement = Class{
             love.graphics.setColor(self.backgroundcolor)
             love.graphics.rectangle("fill",self.position.x, self.position.y, self.width, self.height)
             love.graphics.setColor(Colors.white)
+        end
+
+        -- Draw backgroundsprite
+        if self.backgroundsprite then
+
+            local sx = 1
+            local sy = 1
+            if self.scalebackgroundsprite then
+                sx = self.width  / self.backgroundsprite:getWidth()
+                sy = self.height / self.backgroundsprite:getHeight()
+            end
+
+            love.graphics.draw(self.backgroundsprite, self.position.x, self.position.y, 0.0, sx, sy)
         end
 
         -- Draw text
