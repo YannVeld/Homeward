@@ -14,10 +14,10 @@ end
 function gamestates.menu:enter()
     InstanceManager.removeAll()
 
-    local centerx = love.graphics.getWidth() / 2
-    local centery = love.graphics.getHeight() / 2
-    local buttonwidth = 200
-    local buttonheight = 100
+    local centerx = Push:getWidth() / 2
+    local centery = Push:getHeight() / 2
+    local buttonwidth = 32
+    local buttonheight = 16
 
     myButton = Button(Vector(centerx-buttonwidth/2,centery-buttonheight/2), buttonwidth, buttonheight)
     myButton:setText("Start", {color=Colors.black, ha="center", va="center"})

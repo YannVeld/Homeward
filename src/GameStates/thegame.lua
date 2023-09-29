@@ -7,12 +7,12 @@ gamestates.thegame = {}
 function gamestates.thegame:enter()
     InstanceManager.removeAll()
 
-    local playerDistFromEdge = 50
+    local playerDistFromEdge = 30
 
-    local ypos = love.graphics.getHeight() / 2
+    local ypos = Push:getHeight() / 2
     local player1pos = Vector(playerDistFromEdge, ypos)
     player1 = Player(player1pos, "w", "s", 1)
-    local player2pos = Vector(love.graphics.getWidth() - playerDistFromEdge, ypos)
+    local player2pos = Vector(Push:getWidth() - playerDistFromEdge, ypos)
     player2 = Player(player2pos, "up", "down", 2)
 
     ball = Ball(player1, player2)

@@ -50,7 +50,7 @@ UIElement = Class{
     end,
 
     mouseIsHovering = function(self)
-        local mousex, mousey = love.mouse.getPosition()
+        local mousex, mousey = Push:toGame(love.mouse.getPosition())
         if mousex < self.position.x then
             return false
         end

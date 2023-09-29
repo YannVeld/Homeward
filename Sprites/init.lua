@@ -1,4 +1,6 @@
 
+love.graphics.setDefaultFilter("nearest", "nearest", 1)
+
 Sprites = {}
 
 Sprites.brownBlock = love.graphics.newImage('Sprites/Placeholder/brownBlock.png')

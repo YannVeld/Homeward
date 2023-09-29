@@ -1,8 +1,10 @@
+require("Packages")
+
 Ball = Class{
     __includes = {Instance},
 
-    radius = 5,
-    initspeed = 250,
+    radius = 8,
+    initspeed = 100,
     maxspeed = 1000,
     minspeed = 50,
     speedIncreaseOnBat = 20,
@@ -10,11 +12,6 @@ Ball = Class{
     initAngle = 0.15*math.pi,
     extraPlayerHeight = 10,
     sprite = Sprites.yellowCircle,
-
-    edgedown = love.graphics.getHeight(),
-    edgeup = 0,
-    edgeleft = 0,
-    edgeright = love.graphics.getWidth(),
 
     init = function(self, player1, player2)
         Instance.init(self)
@@ -34,7 +31,7 @@ Ball = Class{
     end,
 
     resetPositionAndVelocity = function(self)
-        self.position = Vector(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2)
+        self.position = Vector(Push:getWidth() / 2, Push:getHeight() / 2)
         local angle = love.math.random(-Ball.initAngle, Ball.initAngle)
         self.velocity = Vector.fromPolar(angle, Ball.initspeed)
     end,
@@ -50,16 +47,21 @@ Ball = Class{
     collideWithWall = function(self, dt)
         local newposition = self.position + dt * self.velocity
 
-        if newposition.y > Ball.edgedown then
+        local edgeleft = 0.0
+        local edgeright = Push:getWidth()
+        local edgedown = Push:getHeight()
+        local edgeup = 0.0
+
+        if newposition.y > edgedown then
             self.velocity.y = -self.velocity.y
         end
-        if newposition.y < Ball.edgeup then
+        if newposition.y < edgeup then
             self.velocity.y = -self.velocity.y
         end
-        if newposition.x > Ball.edgeright then
+        if newposition.x > edgeright then
             self:hitSideWalls()
         end
-        if newposition.x < Ball.edgeleft then
+        if newposition.x < edgeleft then
             self:hitSideWalls()
         end
     end,

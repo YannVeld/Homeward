@@ -1,9 +1,10 @@
 Player = Class{
     __includes = {Instance},
 
-    height = 80,
-    width = 5,
-    speed = 300,
+    height = 32,
+    width = 4,
+    speed = 200,
+    sprite = Sprites.redSquare,
 
     init = function(self, position, upkey, downkey, id)
         Instance.init(self)
@@ -25,7 +26,7 @@ Player = Class{
     end,
 
     draw = function(self)
-        love.graphics.rectangle("fill", self.position.x, self.position.y, Player.width, Player.height)
+        love.graphics.draw(self.sprite, self.position.x, self.position.y, 0.0, Player.width / self.sprite:getWidth(), Player.height / self.sprite:getHeight())
     end,
 
     movePlayer = function(self,spd)
@@ -34,8 +35,8 @@ Player = Class{
         if self.position.y < 0 then
             self.position.y = 0
         end
-        if self.position.y > love.graphics.getHeight() - Player.height then
-            self.position.y = love.graphics.getHeight() - Player.height
+        if self.position.y > Push:getHeight() - Player.height then
+            self.position.y = Push:getHeight() - Player.height
         end
     end,
 }
