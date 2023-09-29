@@ -11,5 +11,7 @@ Lume = require "Packages/lume/lume"
 
 Shack = require "Packages/shack/shack"
 
+Baton = require "Packages/baton/baton"
+
 require "Packages/YannUtil/InstanceManager"
 require "Packages/YannUtil/Instance"

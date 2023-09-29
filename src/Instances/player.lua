@@ -6,22 +6,26 @@ Player = Class{
     speed = 200,
     sprite = Sprites.redSquare,
 
-    init = function(self, position, upkey, downkey, id)
+    init = function(self, position, upkey, downkey, id, inputpair)
         Instance.init(self)
         self.position = position
         self.upkey = upkey
         self.downkey = downkey
         self.id = id
+        self.inputpair = inputpair
     end,
 
     update = function(self, dt)
-        if love.keyboard.isDown(self.downkey) then
-            self:movePlayer(Player.speed * dt)
-        end
+        --if love.keyboard.isDown(self.downkey) then
+        --    self:movePlayer(Player.speed * dt)
+        --end
 
-        if love.keyboard.isDown(self.upkey) then
-            self:movePlayer(-Player.speed * dt)
-        end
+        --if love.keyboard.isDown(self.upkey) then
+        --    self:movePlayer(-Player.speed * dt)
+        --end
+
+        local ix, iy = input:get(self.inputpair)
+        self:movePlayer(Player.speed * ix * dt)
 
     end,
 

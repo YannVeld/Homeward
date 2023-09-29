@@ -2,6 +2,7 @@ require("Packages")
 require("Sprites")
 require("Fonts")
 require("src/GameStates")
+require("input")
 
 -- Initialization variables
 local initialGameState = gamestates.menu
@@ -13,12 +14,14 @@ function love.load()
     SetupScreen()
     Shack:setDimensions(Push:getDimensions())
     love.graphics.setFont(Fonts.m3x6)
+    input = GetInputs()
     camera = Camera()
     InitializeGameState()
 end
 
 function love.update(dt)
     Shack:update(dt)
+    input:update()
     InstanceManager.update(dt)
     Timer.update(dt)
 end

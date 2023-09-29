@@ -11,9 +11,9 @@ function gamestates.thegame:enter()
 
     local ypos = Push:getHeight() / 2
     local player1pos = Vector(playerDistFromEdge, ypos)
-    player1 = Player(player1pos, "w", "s", 1)
+    player1 = Player(player1pos, "w", "s", 1, "move_pl1")
     local player2pos = Vector(Push:getWidth() - playerDistFromEdge, ypos)
-    player2 = Player(player2pos, "up", "down", 2)
+    player2 = Player(player2pos, "up", "down", 2, "move_pl2")
 
     ball = Ball(player1, player2)
 
