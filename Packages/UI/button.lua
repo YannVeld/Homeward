@@ -1,0 +1,93 @@
+Button = Class{
+    __includes = {UIElement},
+
+    init = function(self, position, width, height)
+        UIElement.init(self, position, width, height)
+
+        self._buttonHovered = false
+        self._buttonHeld = false
+        self._buttonPressed = false
+        self._buttonReleased = false
+        self._onButtonHeld = function() end
+        self._onButtonPressed = function() end
+        self._onButtonReleased = function() end
+        self._onButtonHovered = function() end
+
+        self._normalColor = Colors.white
+        self._hoveredColor = Colors.grey
+        self._heldColor = Colors.black
+    end,
+
+    update = function(self, dt)
+        self:_updateButtonVars()
+        self:_checkInvokeFunction()
+        self:_checkBackgroundColors()
+    end,
+
+    setOnButtonHeld = function(self, onButtonHeld)
+        self._onButtonHeld = onButtonHeld
+    end,
+    setOnButtonPressed = function(self, onButtonPressed)
+        self._onButtonPressed = onButtonPressed
+    end,
+    setOnButtonReleased = function(self, onButtonReleased)
+        self._onButtonReleased = onButtonReleased
+    end,
+    setOnButtonHovered = function(self, onButtonHovered)
+        self._onButtonHovered = onButtonHovered
+    end,
+
+    setBackgroundColors = function(self, normalColor, hoveredColor, heldColor)
+        self._normalColor = normalColor
+        self._hoveredColor = hoveredColor
+        self._heldColor = heldColor
+    end,
+
+    _updateButtonVars = function(self)
+        self._buttonHovered = self:mouseIsHovering()
+        self._buttonPressed = false
+        self._buttonReleased = false
+
+        local holdingButton = self:_checkButtonHeld()
+
+        -- If the button is being held
+        if holdingButton then
+            if not self._buttonHeld then
+                self._buttonPressed = true
+            end
+            self._buttonHeld = true
+            return
+        end
+
+        -- If the button is not being held
+        if self._buttonHeld then
+            self._buttonReleased = true
+        end
+        self._buttonHeld = false
+    end,
+
+    _checkButtonHeld = function(self, button)
+        local isHovered = self:mouseIsHovering()
+        if not isHovered then
+            return false
+        end
+
+        if not button then
+            button = 1
+        end
+        return love.mouse.isDown(button) 
+    end,
+
+    _checkInvokeFunction = function(self)
+        if self._buttonPressed then self._onButtonPressed() end
+        if self._buttonReleased then self._onButtonReleased() end
+        if self._buttonHeld then self._onButtonHeld() end
+        if self._buttonHovered then self._onButtonHovered() end
+    end,
+
+    _checkBackgroundColors = function(self)
+        self:setBackgroundColor(self._normalColor)
+        if self._buttonHovered then self:setBackgroundColor(self._hoveredColor) end
+        if self._buttonHeld then self:setBackgroundColor(self._heldColor) end
+    end,
+}
