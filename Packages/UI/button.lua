@@ -16,12 +16,17 @@ Button = Class{
         self._normalColor = Colors.white
         self._hoveredColor = Colors.grey
         self._heldColor = Colors.black
+
+        self._normalSprite = nil
+        self._hoveredSprite = nil
+        self._heldSprite = nil
     end,
 
     update = function(self, dt)
         self:_updateButtonVars()
         self:_checkInvokeFunction()
         self:_checkBackgroundColors()
+        self:_checkBackgroundSprites()
     end,
 
     setOnButtonHeld = function(self, onButtonHeld)
@@ -41,6 +46,16 @@ Button = Class{
         self._normalColor = normalColor
         self._hoveredColor = hoveredColor
         self._heldColor = heldColor
+    end,
+
+    setBackgroundSprites = function(self, normalSprite, hoveredSprite, heldSprite, doscaling)
+        self._normalSprite = normalSprite
+        self._hoveredSprite = hoveredSprite
+        self._heldSprite = heldSprite
+        if doscaling then
+            self.scalebackgroundsprite = doscaling
+        end
+        self:setBackgroundVisibility(false)
     end,
 
     _updateButtonVars = function(self)
@@ -89,5 +104,15 @@ Button = Class{
         self:setBackgroundColor(self._normalColor)
         if self._buttonHovered then self:setBackgroundColor(self._hoveredColor) end
         if self._buttonHeld then self:setBackgroundColor(self._heldColor) end
+    end,
+
+    _checkBackgroundSprites = function(self)
+        local backColorIsVisible = self.backgroundvisible
+
+        self:setBackgroundSprite(self._normalSprite)
+        if self._buttonHovered then self:setBackgroundSprite(self._hoveredSprite) end
+        if self._buttonHeld then self:setBackgroundSprite(self._heldSprite) end
+
+        self:setBackgroundVisibility(backColorIsVisible)
     end,
 }
