@@ -90,6 +90,15 @@ Grid = Class{
         return x, y
     end,
 
+    getPosition = function(self, i, j)
+        if not self:isGridIndex(i,j) then 
+            love.errorhandler("Trying to index non-existing grid cell")
+        end
+
+        local x, y = self._grid[i][j]:getPosition()
+        return x, y
+    end,
+
     getContent = function(self, i, j)
         if not self:isGridIndex(i,j) then 
             love.errorhandler("Trying to index non-existing grid cell")

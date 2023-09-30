@@ -13,6 +13,10 @@ GridObject = Class{
         return self.realPosition.x + self.width / 2, self.realPosition.y + self.height / 2
     end,
 
+    getPosition = function(self)
+        return self.realPosition.x, self.realPosition.y
+    end,
+
     getContent = function(self)
         return self.content
     end,
