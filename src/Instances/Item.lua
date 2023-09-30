@@ -3,9 +3,10 @@ require("src/Instances/Pickupable")
 Item = Class{
     __includes = {Pickupable},
 
-    init = function(self, position, sprite, backgroundsprite, shape, basecell, pickupManager, itemGrid)
+    init = function(self, position, sprite, backgroundsprite, highlightsprite, shape, basecell, pickupManager, itemGrid)
         self.itemsprite = sprite
         self.backgroundsprite = backgroundsprite
+        self.highlightsprite = highlightsprite
         self.shape = shape
         self.basecell = basecell
         self.itemGrid = itemGrid
@@ -33,11 +34,13 @@ Item = Class{
         love.graphics.draw(self.backgroundsprite, self.position.x, self.position.y)
         love.graphics.draw(self.itemsprite, self.position.x, self.position.y)
 
-        --for i,pos in ipairs(self.shape) do
-        --    local xpos = self.position.x + pos[1] * self.itemGrid.cellWidth - self.sprite:getWidth() / 2
-        --    local ypos = self.position.y + pos[2] * self.itemGrid.cellHeight - self.sprite:getHeight() / 2
-        --    love.graphics.draw(self.sprite, xpos, ypos)
-        --end
+
+        if self:checkCanBepickedup() then
+            local mousex, mousey = Push:toGame(love.mouse.getPosition())
+            if self:posIsOnItem(mousex, mousey) then
+                love.graphics.draw(self.highlightsprite, self.position.x, self.position.y)
+            end
+        end
     end,
 
     mousereleased = function(self, x, y, button, istouch, presses)

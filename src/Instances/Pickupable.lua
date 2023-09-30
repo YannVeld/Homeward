@@ -68,4 +68,17 @@ Pickupable = Class{
     isPickedUp = function(self)
         return pickupManager:isHolding(self)
     end,
+
+    checkCanBepickedup = function(self)
+        if not self.canBePickedUp then
+            return false
+        end
+        if self:isPickedUp() then
+            return true
+        end
+        if not pickupManager:isHolding(nil) then
+            return false
+        end
+        return true
+    end,
 }
