@@ -10,6 +10,8 @@ SceneManager = Class{
         self.grid = grid
         self.itemStorage = itemStorage
 
+        self.imagePosition = Vector(10,10)
+
         self.storyTexty = 8
         self.storyTextx_noimage = 13
         self.storyTextx_withImage = 55
@@ -28,6 +30,12 @@ SceneManager = Class{
     end,
 
     draw = function(self)
+
+        if self.curScene.image then
+            love.graphics.draw(Sprites.CharacterFrame, self.imagePosition:unpack())
+            love.graphics.draw(self.curScene.image, self.imagePosition:unpack())
+        end
+
         local textColor = Colors.hexToRGB("#4B3D44")
 
         love.graphics.setColor(textColor)
@@ -57,7 +65,15 @@ SceneManager = Class{
         end
 
         local conversion1 = self.curScene.conversion1
+        if conversion1 and (not conversion1.condition()) then
+            conversion1 = nil
+        end
+
         local conversion2 = self.curScene.conversion2
+        if conversion2 and (not conversion2.condition()) then
+            conversion2 = nil
+        end
+
         self.conversionHandler = ConversionHandler(self.pickupManager, self.grid, self.itemStorage, conversion1, conversion2)
         self.storyText = self.curScene.story
         self.questionText = self.curScene.question
@@ -96,5 +112,20 @@ SceneManager = Class{
         self.continueButton = nil
 
         self:setupScene()
+    end,
+
+    playerHasType = function(self, itemType)
+        for i=1, self.grid.cellsWide do
+            for j=1, self.grid.cellsHigh do
+                local obj = self.grid:getContent(i,j)
+                if obj then
+                    local hasType = Lume.find(obj.types, itemType)
+                    if hasType then
+                        return true
+                    end
+                end
+            end
+        end
+        return false
     end,
 }

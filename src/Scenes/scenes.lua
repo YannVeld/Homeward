@@ -19,7 +19,7 @@ function GetScene1()
 end
 
 function GetScene2()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameBob,
                 "He immediately meets a humble merchant",
                 "What can I do for ye?",
                 Conversion("Weapon\n->\nGold", {ItemTypes.weapon}, {NewGoldItem}),
@@ -40,3 +40,5 @@ function GetFlowerScene()
                 "Probably a wise idea.",
                 GetPitfallInitialScene, nil)
 end
+
+

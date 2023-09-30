@@ -5,3 +5,4 @@ require("src/items")
 
 require("src/Scenes/scenes")
 require("src/Scenes/pitFallScenes")
+require("src/Scenes/banditAttackScenes")

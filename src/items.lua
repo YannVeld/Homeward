@@ -32,7 +32,7 @@ NewRingItem = function(position, pickupManager, grid, itemStorage)
     local shape = {{0,0}}
     local basecell = 1
     local types = {ItemTypes.treasure}
-    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    item = Item(name, position, Sprites["1x1itemsRing"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
 
@@ -41,7 +41,7 @@ NewHugeGemItem = function(position, pickupManager, grid, itemStorage)
     local shape = {{0,0}}
     local basecell = 1
     local types = {ItemTypes.treasure}
-    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    item = Item(name, position, Sprites["1x1itemsGem"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
 
@@ -50,6 +50,15 @@ NewWeirdMushroomItem = function(position, pickupManager, grid, itemStorage)
     local shape = {{0,0}}
     local basecell = 1
     local types = {ItemTypes.food}
-    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsFood"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    item = Item(name, position, Sprites["1x1itemsMushroom"], Sprites["1x1itemsFood"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewCakeItem = function(position, pickupManager, grid, itemStorage)
+    local name = "A cake"
+    local shape = {{0,0}, {1,0}}
+    local basecell = 1
+    local types = {ItemTypes.food}
+    item = Item(name, position, Sprites["2x1itemsCake"], Sprites["2x1itemsFood"], Sprites["2x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end

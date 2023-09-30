@@ -3,7 +3,9 @@ function GetPitfallInitialScene()
     return PitfallScene1()
 end
 
-local _afterPitfallScene = GetScene1
+function _afterPitfallScene()
+    return GetBanditAttackInitialScene()
+end
 
 function PitfallScene1() 
     return Scene(nil,
