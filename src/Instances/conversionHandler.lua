@@ -3,7 +3,7 @@ require("src/conversion")
 ConversionHandler = Class{
     __includes = {Instance},
 
-    init = function(self, pickupManager, grid, itemStorage)
+    init = function(self, pickupManager, grid, itemStorage, numOfConversionsAllowed)
         Instance.init(self)
 
         self.pickupManager = pickupManager
@@ -13,7 +13,19 @@ ConversionHandler = Class{
         --self.conversion2 = NewGoldToWeaponConversion()
         self.conversion2 = GainSwordConversion()
 
+        self.numOfConversionsAllowed = numOfConversionsAllowed
+        self.numOfConversionsDone = 0
+
         self:createOptionButtons()
+    end,
+
+    update = function(self, dt)
+        if self.numOfConversionsDone >= self.numOfConversionsAllowed then
+            self.pickupManager:setItemLock(false)
+            OptionButton1:destroy()
+            OptionButton2:destroy()
+            self:destroy()
+        end
     end,
 
     createOptionButtons = function(self)
@@ -43,6 +55,9 @@ ConversionHandler = Class{
     end,
 
     performConversion = function(self, conversion)
+        if self.numOfConversionsDone >= self.numOfConversionsAllowed then
+            return false
+        end
         if not self.itemStorage:isEmpty() then
             return false
         end
@@ -55,6 +70,7 @@ ConversionHandler = Class{
             for i, fn in ipairs(conversion.outItems) do
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
             end
+            self.numOfConversionsDone = self.numOfConversionsDone + 1
             return true
         end
         
@@ -70,6 +86,7 @@ ConversionHandler = Class{
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
                 self.itemStorage:putInStorage(item)
             end
+            self.numOfConversionsDone = self.numOfConversionsDone + 1
             return true
         end
         return false

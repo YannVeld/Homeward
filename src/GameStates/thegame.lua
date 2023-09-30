@@ -21,7 +21,7 @@ function gamestates.thegame:enter()
     pickupManager = ItemPickupManager()
     infoScreenManager = InfoScreenManager(pickupManager)
     itemStorage = ItemStorage()
-    conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage)
+    conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage, 1)
 
     anItem = NewSwordItem(Vector(64, 16), pickupManager, myGrid, itemStorage)
     --anItem2 = NewGoldItem(Vector(96, 16), pickupManager, myGrid, itemStorage)
