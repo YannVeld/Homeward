@@ -10,7 +10,10 @@ SceneManager = Class{
         self.grid = grid
         self.itemStorage = itemStorage
 
-        self.storyTextPosition = Vector(55, 14)
+        self.storyTexty = 8
+        self.storyTextx_noimage = 13
+        self.storyTextx_withImage = 55
+
         self.storyTextMaxX = 144
         self.storyText = ""
 
@@ -41,10 +44,16 @@ SceneManager = Class{
     end,
 
     setupScene = function(self)
+        self.storyTextPosition = Vector(self.storyTextx_noimage, self.storyTexty)
+
         if not self.curScene then
             self.storyText = "No scene to show"
             self.questionText = ""
             return
+        end
+
+        if self.curScene.image then
+            self.storyTextPosition.x = self.storyTextx_withImage
         end
 
         local conversion1 = self.curScene.conversion1

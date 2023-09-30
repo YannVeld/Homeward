@@ -8,7 +8,8 @@ function GetInitialScene()
 end
 
 function GetScene1() 
-    return Scene("Out hero starts their story here, in the town of Hazelwood.",
+    return Scene(nil,
+                "Out hero starts their story here, in the town of Hazelwood.",
                 "What do they have at their side?",
                 Conversion("Gain Weapon", {}, {NewSwordItem}),
                 "And so it begins...",
@@ -18,7 +19,8 @@ function GetScene1()
 end
 
 function GetScene2()
-    return Scene("He immediately meets a humble merchant",
+    return Scene(nil,
+                "He immediately meets a humble merchant",
                 "What can I do for ye?",
                 Conversion("Weapon\n->\nGold", {ItemTypes.weapon}, {NewGoldItem}),
                 "A trade well done",
@@ -29,7 +31,8 @@ end
 
 
 function GetFlowerScene()
-    return Scene("You find an interesting mushroom in the ground next to a big tree. Perhaps it is edible.",
+    return Scene(nil,
+                "You find an interesting mushroom in the ground next to a big tree. Perhaps it is edible.",
                 "Pick it?",
                 Conversion("Yes", {}, {NewWeirdMushroomItem}),
                 "Might come in useful.",

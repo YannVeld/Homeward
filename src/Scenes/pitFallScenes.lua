@@ -6,7 +6,8 @@ end
 local _afterPitfallScene = GetScene1
 
 function PitfallScene1() 
-    return Scene("There seems to be something shiny poking out of the ground.",
+    return Scene(nil,
+                "There seems to be something shiny poking out of the ground.",
                 "Will you investigate?",
                 Conversion("Yes", {}, {NewRingItem}),
                 "Oh nice, a ring! Wait, what is that sound ...?",
@@ -16,7 +17,8 @@ function PitfallScene1()
 end
 
 function PitfallScene2()
-    return Scene("The ground collapses! You fall into a pithole!",
+    return Scene(nil,
+                "The ground collapses! You fall into a pithole!",
                 "Lose one of your items",
                 Conversion("Any item", AllItemTypes, {}),
                 "That was painful. The pit is too high to climb back up. This cave seems to be the only way.",
@@ -26,7 +28,8 @@ function PitfallScene2()
 end
 
 function PitfallScene3()
-    return Scene("After walking for a while in this dark tunnel you start to get very hungry.",
+    return Scene(nil,
+                "After walking for a while in this dark tunnel you start to get very hungry.",
                 "Eat something",
                 Conversion("Some food", {ItemTypes.food}, {}),
                 "Delicious! Let's explore this cave a bit more.",
@@ -37,7 +40,8 @@ function PitfallScene3()
 end
 
 function PitfallScene4()
-    return Scene("After walking for a bit you enter a beautiful carved room, with a huge gem on a pedestal in the middle of it.",
+    return Scene(nil,
+                "After walking for a bit you enter a beautiful carved room, with a huge gem on a pedestal in the middle of it.",
                 "Take the gem?",
                 Conversion("Yes!", {}, {NewHugeGemItem}),
                 "It' so pretty!",
@@ -47,7 +51,8 @@ function PitfallScene4()
 end
 
 function ExitPitfallScene()
-    return Scene("You safely make it out of the cave.",
+    return Scene(nil,
+                "You safely make it out of the cave.",
                 "Let's continue!",
                 Conversion("Go!", {}, {}),
                 "Nice to be out in the sun again.",
