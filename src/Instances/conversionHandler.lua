@@ -27,7 +27,7 @@ ConversionHandler = Class{
         if self.conversion1 then
             OptionButton1 = Button(button1pos, buttonwidth, buttonheight)
             OptionButton1:setText(self.conversion1.description, {color=textColor, ha="center", va="top"})
-            OptionButton1:setOnButtonReleased(function() self:performConversion(self.conversion1) end)
+            OptionButton1:setOnButtonReleased(function() self:performConversion(self.conversion1, 1) end)
             OptionButton1:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
             OptionButton1:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
             OptionButton1:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
@@ -37,7 +37,7 @@ ConversionHandler = Class{
         if self.conversion2 then
             OptionButton2 = Button(button2pos, buttonwidth, buttonheight)
             OptionButton2:setText(self.conversion2.description, {color=textColor, ha="center", va="top"})
-            OptionButton2:setOnButtonReleased(function() self:performConversion(self.conversion2) end)
+            OptionButton2:setOnButtonReleased(function() self:performConversion(self.conversion2, 2) end)
             OptionButton2:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
             OptionButton2:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
             OptionButton2:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
@@ -45,7 +45,7 @@ ConversionHandler = Class{
         end
     end,
 
-    performConversion = function(self, conversion)
+    performConversion = function(self, conversion, id)
         if not self.itemStorage:isEmpty() then
             return false
         end
@@ -58,7 +58,7 @@ ConversionHandler = Class{
             for i, fn in ipairs(conversion.outItems) do
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
             end
-            self:didConversion(1)
+            self:didConversion(id)
             return true
         end
         
@@ -69,12 +69,12 @@ ConversionHandler = Class{
         local itemInHand = self.pickupManager.pickedupItem
 
         if self.checkForMatchingTypes(conversion.inTypes, itemInHand.types) then
+            itemInHand:destroy()
             for i, fn in ipairs(conversion.outItems) do
-                itemInHand:destroy()
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
                 self.itemStorage:putInStorage(item)
             end
-            self:didConversion(2)
+            self:didConversion(id)
             return true
         end
         return false

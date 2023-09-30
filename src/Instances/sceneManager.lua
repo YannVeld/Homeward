@@ -58,17 +58,21 @@ SceneManager = Class{
         local buttonwidth = Sprites.ContinueButton:getWidth()
         local buttonheight = Sprites.ContinueButton:getHeight()
 
-        self.storyText = self.curScene.afterstory
+        if id == 1 then
+            self.storyText = self.curScene.afterstory1
+        else
+            self.storyText = self.curScene.afterstory2
+        end
         self.questionText = ""
 
         self.continueButton = Button(self.continueButtonPos, buttonwidth, buttonheight)
         self.continueButton:setText("Continue", {color=textColor, ha="center", va="center"})
-        self.continueButton:setOnButtonReleased(function() self:continueToNextScene() end)
+        self.continueButton:setOnButtonReleased(function() self:continueToNextScene(id) end)
         self.continueButton:setBackgroundSprites(Sprites.ContinueButton, Sprites.ContinueButtonHover, Sprites.ContinueButton, false)
         self.continueButton:setDrawLayer(DrawLayers.Normal)
     end,
 
-    continueToNextScene = function(self)
+    continueToNextScene = function(self, id)
         if self.itemStorage.item then
             self.itemStorage.item:destroy()
         end

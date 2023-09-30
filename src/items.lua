@@ -26,3 +26,30 @@ NewGoldItem = function(position, pickupManager, grid, itemStorage)
     item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsMoney"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
+
+NewRingItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Ring"
+    local shape = {{0,0}}
+    local basecell = 1
+    local types = {ItemTypes.treasure}
+    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewHugeGemItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Huge Gem"
+    local shape = {{0,0}}
+    local basecell = 1
+    local types = {ItemTypes.treasure}
+    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewWeirdMushroomItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Edible(?) Mushroom"
+    local shape = {{0,0}}
+    local basecell = 1
+    local types = {ItemTypes.food}
+    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsFood"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end

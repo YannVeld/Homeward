@@ -1,5 +1,7 @@
 require("src/scene")
 require("src/conversion")
+require("src/itemTypes")
+require("src/items")
 
 function GetInitialScene()
     return GetScene1()
@@ -9,16 +11,29 @@ function GetScene1()
     return Scene("Out hero starts their story here, in the town of Hazelwood.",
                 "What do they have at their side?",
                 Conversion("Gain Weapon", {}, {NewSwordItem}),
-                Conversion("Gain Gold", {}, {NewGoldItem}),
                 "And so it begins...",
-                GetScene2, GetScene2)
+                Conversion("Gain Gold", {}, {NewGoldItem}),
+                nil,
+                GetScene2, nil)
 end
 
 function GetScene2()
     return Scene("He immediately meets a humble merchant",
                 "What can I do for ye?",
                 Conversion("Weapon\n->\nGold", {ItemTypes.weapon}, {NewGoldItem}),
-                Conversion("Gold\n->\nWeapon", {ItemTypes.money}, {NewKnifeItem}),
                 "A trade well done",
-                GetScene1, GetScene1)
+                Conversion("Gold\n->\nWeapon", {ItemTypes.money}, {NewKnifeItem}),
+                nil,
+                GetFlowerScene, nil)
+end
+
+
+function GetFlowerScene()
+    return Scene("You find an interesting mushroom in the ground next to a big tree. Perhaps it is edible.",
+                "Pick it?",
+                Conversion("Yes", {}, {NewWeirdMushroomItem}),
+                "Might come in useful.",
+                Conversion("No", {}, {}),
+                "Probably a wise idea.",
+                GetPitfallInitialScene, nil)
 end
