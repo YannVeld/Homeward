@@ -10,7 +10,7 @@ Sprites.yellowCircle = love.graphics.newImage('Sprites/Placeholder/yellowCircle.
 
 
 -- Load all sprites in base folder
-local spriteDir = "Sprites"
+local spriteDir = "Sprites/Sprites"
 local filenames = love.filesystem.getDirectoryItems(spriteDir)
 
 for i,file in ipairs(filenames) do
