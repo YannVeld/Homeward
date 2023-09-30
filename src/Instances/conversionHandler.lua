@@ -48,6 +48,10 @@ ConversionHandler = Class{
         end
         
         if #conversion.inTypes == 0 then
+            if not self.pickupManager:isEmpty() then
+                return false
+            end
+
             for i, fn in ipairs(conversion.outItems) do
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
             end
@@ -64,6 +68,7 @@ ConversionHandler = Class{
             for i, fn in ipairs(conversion.outItems) do
                 itemInHand:destroy()
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
+                self.itemStorage:putInStorage(item)
             end
             return true
         end

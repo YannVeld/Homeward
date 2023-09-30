@@ -6,7 +6,7 @@ ItemStorage = Class{
     init = function(self, pickupManager)
         Instance.init(self)
 
-        self.position = Vector(76, 49)
+        self.position = Vector(79, 40)
         self.item = null
     end,
 
@@ -43,7 +43,9 @@ ItemStorage = Class{
             return
         end
 
-        self.item.position = self.position
+        local posx = self.position.x - self.item.width / 2
+        local posy = self.position.y - self.item.height / 2
+        self.item.position = Vector(posx, posy)
     end,
 
     putInStorage = function(self, item)
@@ -51,6 +53,7 @@ ItemStorage = Class{
             return false
         end
         self.item = item
+        self:placeItemAtStorage()
         return true
     end,
 }
