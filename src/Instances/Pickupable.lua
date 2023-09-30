@@ -17,10 +17,13 @@ Pickupable = Class{
             local mousex, mousey = Push:toGame(love.mouse.getPosition())
             self.position = Vector(mousex - self.width/2, mousey - self.height/2)
         end
+
+        if self:isHoveredByMouse() then
+            self.pickupManager.pickupableUnderneathMouse = self
+        end
     end,
 
     posIsOnItem = function(self, x, y)
-        --local mousex, mousey = Push:toGame(love.mouse.getPosition())
 
         local leftedge = self.position.x
         local topedge = self.position.y
@@ -34,6 +37,11 @@ Pickupable = Class{
             return false
         end
         return true
+    end,
+
+    isHoveredByMouse = function(self)
+        local mousex, mousey = Push:toGame(love.mouse.getPosition())
+        return self:posIsOnItem(mousex, mousey)
     end,
 
     mousereleased = function(self, x, y, button, istouch, presses)

@@ -15,7 +15,13 @@ InfoScreenManager = Class{
 
         local item = self.pickupManager.pickedupItem
         if not item then
-            return
+            item = self.pickupManager.pickupableUnderneathMouse
+            if not item then
+                return
+            end
+            if not item.itemsprite then
+                return
+            end
         end
         self.text:set(item.name .. " (" .. item.types[1] .. ")")
 

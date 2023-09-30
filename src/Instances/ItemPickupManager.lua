@@ -5,9 +5,23 @@ ItemPickupManager = Class{
     init = function(self)
         self.pickedupItem = nil
         self.itemLocked = false
+        self.pickupableUnderneathMouse = nil
     end,
 
     update = function(self, dt)
+        self:checkPickupableUnderMouse()
+    end,
+
+    checkPickupableUnderMouse = function(self)
+        if not self.pickupableUnderneathMouse then
+            self.pickupableUnderneathMouse = nil
+            return
+        end
+
+        if not self.pickupableUnderneathMouse:isHoveredByMouse() then
+            self.pickupableUnderneathMouse = nil
+            return
+        end
     end,
 
     setItemLock = function(self, lock)

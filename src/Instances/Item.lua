@@ -34,6 +34,9 @@ Item = Class{
         if self:isPickedUp() then
             self:moveWithMouse()
         end
+        if self:isHoveredByMouse() then
+            self.pickupManager.pickupableUnderneathMouse = self
+        end
     end,
 
     drawUI = function(self)

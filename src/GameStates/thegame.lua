@@ -33,7 +33,7 @@ function gamestates.thegame:enter()
 end
 
 function gamestates.thegame:update(dt)
-
+    pickupManager:update(dt)
 end
 
 function gamestates.thegame:keyreleased(key, code)

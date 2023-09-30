@@ -40,7 +40,9 @@ SceneManager = Class{
     end,
 
     continueToNextScene = function(self)
-        self.itemStorage.item:destroy()
+        if self.itemStorage.item then
+            self.itemStorage.item:destroy()
+        end
 
         if id == 1 then
             self.curScene = self.curScene.followupScene1
