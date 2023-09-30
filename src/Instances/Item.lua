@@ -4,11 +4,16 @@ Item = Class{
     __includes = {Pickupable},
 
     init = function(self, position, sprite, shape, pickupManager, itemGrid)
-        Pickupable.init(self, position, sprite:getWidth(), sprite:getHeight(), pickupManager)
-
         self.sprite = sprite
         self.shape = shape
         self.itemGrid = itemGrid
+
+        local width, height = self:getItemSize()
+        width = width * self.itemGrid.cellWidth 
+        height = height * self.itemGrid.cellHeight 
+
+        Pickupable.init(self, position, width, height, pickupManager)
+
 
         self.isPlacedOnGrid = false
         self.gridObjs = {}
@@ -32,16 +37,21 @@ Item = Class{
     end,
 
     mousereleased = function(self, x, y, button, istouch, presses)
-        if not button == 1 then
-            return
+        if button == 1 then
+            self:onLeftClick(x, y, istouch, presses)
         end
+        if button == 2 then
+            self:onRightClick(x, y, istouch, presses)
+        end
+    end,
 
+    onLeftClick = function(self, x, y, istouch, presses)
         local mousex, mousey = Push:toGame(x, y)
         local i,j = self.itemGrid:getGridIndex(mousex, mousey)
         local mouseIsOnGrid =  self.itemGrid:isGridIndex(i,j)
 
         if not mouseIsOnGrid then
-            return Pickupable.mousereleased(self, x, y, button, istouch, presses)
+            return Pickupable.mousereleased(self, x, y, 1, istouch, presses)
         end
 
         if self:isOnGrid() then
@@ -52,7 +62,52 @@ Item = Class{
             self:pickupFromGrid()
             return
         end
-        self:putOnGrid(i,j)
+
+        if self:isPickedUp() then
+            self:putOnGrid(i,j)
+        end
+    end,
+
+    onRightClick = function(self, x, y, istouch, presses)
+        if self.isPlacedOnGrid then
+            return
+        end
+        self:rotate()
+    end,
+
+    getItemSize = function(self)
+        local minx, maxx = math.huge, -math.huge
+        local miny, maxy = math.huge, -math.huge
+        for ind,pos in ipairs(self.shape) do
+            if pos[1] > maxx then
+                maxx = pos[1]
+            end
+            if pos[1] < minx then
+                minx = pos[1]
+            end
+            if pos[2] > maxy then
+                maxy = pos[2]
+            end
+            if pos[2] < miny then
+                miny = pos[2]
+            end
+        end
+
+        local width = math.abs(maxx - minx) + 1
+        local height = math.abs(maxy - miny) + 1
+        return width, height
+    end,
+
+    rotate = function(self)
+        if self:isOnGrid() then
+            love.errorhandler("Cannot rotate when on a grid")
+        end
+        if not self:isPickedUp() then
+            return
+        end
+        for ind,pos in ipairs(self.shape) do
+            self.shape[ind] = {-pos[2], pos[1]}
+        end
     end,
 
     moveWithMouse = function(self)
