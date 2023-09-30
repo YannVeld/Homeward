@@ -70,13 +70,16 @@ Pickupable = Class{
     end,
 
     checkCanBepickedup = function(self)
+        if self.pickupManager.itemLocked then
+            return false
+        end
         if not self.canBePickedUp then
             return false
         end
         if self:isPickedUp() then
             return true
         end
-        if not pickupManager:isHolding(nil) then
+        if not self.pickupManager:isHolding(nil) then
             return false
         end
         return true

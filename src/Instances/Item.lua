@@ -1,15 +1,18 @@
 require("src/Instances/Pickupable")
+require("src/itemTypes")
 
 Item = Class{
     __includes = {Pickupable},
 
-    init = function(self, position, sprite, backgroundsprite, highlightsprite, shape, basecell, pickupManager, itemGrid)
+    init = function(self, name, position, sprite, backgroundsprite, highlightsprite, shape, basecell, types, pickupManager, itemGrid)
+        self.name = name
         self.itemsprite = sprite
         self.backgroundsprite = backgroundsprite
         self.highlightsprite = highlightsprite
         self.shape = shape
         self.basecell = basecell
         self.itemGrid = itemGrid
+        self.types = types
 
         self.cellsWide, self.cellsHigh = self:getItemSize()
         local width = self.cellsWide * self.itemGrid.cellWidth 
@@ -30,7 +33,7 @@ Item = Class{
         end
     end,
 
-    draw = function(self)
+    drawUI = function(self)
         love.graphics.draw(self.backgroundsprite, self.position.x, self.position.y)
         love.graphics.draw(self.itemsprite, self.position.x, self.position.y)
 
@@ -55,7 +58,7 @@ Item = Class{
     destroy = function(self)
         self:removeFromGrid()
         if self.pickupManager:isHolding(self) then
-            self.pickupManager.dropItem()
+            self.pickupManager.pickedupItem = nil
         end
         
         Instance.destroy(self)
@@ -196,5 +199,10 @@ Item = Class{
 
     isOnGrid = function(self)
         return self.isPlacedOnGrid
+    end,
+
+    isOfType = function(self, type)
+        local times = Lume.find(self.types, type)
+        return times > 0
     end,
 }
