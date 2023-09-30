@@ -6,7 +6,7 @@ require("input")
 
 -- Initialization variables
 local initialGameState = gamestates.thegame
-local gameWidth, gameHeight = 320, 180 --1280, 720
+local gameWidth, gameHeight = 240, 135 --1280, 720
 local windowToGameScale = 4
 
 function love.load()
@@ -31,6 +31,8 @@ function love.draw()
     Push:start()
     Shack:apply()
     camera:attach()
+    print(Sprites.GameView:getWidth())
+    love.graphics.draw(Sprites.GameView, 0.0, 0.0)
     InstanceManager.draw()
     camera:detach()
     InstanceManager.drawUI()
