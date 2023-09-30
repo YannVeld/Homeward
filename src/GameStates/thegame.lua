@@ -2,8 +2,6 @@ require("src/Instances/scoreManager")
 require("src/Instances/player")
 require("src/Instances/ball")
 
-require("src/Grid")
-
 gamestates.thegame = {}
 
 function gamestates.thegame:enter()
@@ -49,6 +47,10 @@ end
 function gamestates.thegame:keyreleased(key, code)
     if key == 'escape' then
         Gamestate.switch(gamestates.menu)
+    end
+
+    if key == 'space' then
+        myGrid:clearAll()
     end
 end
 

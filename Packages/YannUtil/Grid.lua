@@ -1,6 +1,4 @@
 
-require("src/GridObject")
-
 Grid = Class{
 
     init = function(self, position, cellsWide, cellsHigh, cellWidth, cellHeight)
@@ -116,5 +114,13 @@ Grid = Class{
             love.errorhandler("Trying to index non-existing grid cell")
         end
         return self._grid[i][j]:clear()
+    end,
+
+    clearAll = function(self)
+        for i=1, self.cellsWide do
+            for j=1, self.cellsHigh do
+                self._grid[i][j]:clear()
+            end
+        end
     end,
 }

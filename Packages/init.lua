@@ -15,3 +15,5 @@ Baton = require "Packages/baton/baton"
 
 require "Packages/YannUtil/InstanceManager"
 require "Packages/YannUtil/Instance"
+require "Packages/YannUtil/Grid"
+require "Packages/YannUtil/GridObject"
