@@ -45,6 +45,15 @@ Item = Class{
         end
     end,
 
+    destroy = function(self)
+        self:removeFromGrid()
+        if self.pickupManager:isHolding(self) then
+            self.pickupManager.dropItem()
+        end
+        
+        Instance.destroy(self)
+    end,
+
     onLeftClick = function(self, x, y, istouch, presses)
         local mousex, mousey = Push:toGame(x, y)
         local i,j = self.itemGrid:getGridIndex(mousex, mousey)
@@ -163,6 +172,10 @@ Item = Class{
         if not succes then
             return false
         end
+        self:removeFromGrid()
+    end,
+
+    removeFromGrid = function(self)
         for i, obj in ipairs(self.gridObjs) do
             obj:clear()
             obj = nil
