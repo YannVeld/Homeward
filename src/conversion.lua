@@ -20,3 +20,6 @@ end
 GainSwordConversion = function(self)
     return Conversion("Gain Weapon", {}, {NewSwordItem})
 end
+GainGoldConversion = function(self)
+    return Conversion("Gain Gold", {}, {NewGoldItem})
+end

@@ -21,10 +21,10 @@ function gamestates.thegame:enter()
     pickupManager = ItemPickupManager()
     infoScreenManager = InfoScreenManager(pickupManager)
     itemStorage = ItemStorage()
-    conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage, 1)
 
-    anItem = NewSwordItem(Vector(64, 16), pickupManager, myGrid, itemStorage)
-    --anItem2 = NewGoldItem(Vector(96, 16), pickupManager, myGrid, itemStorage)
+    local conversion1 = GainGoldConversion()
+    local conversion2 = GainSwordConversion()
+    conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage, conversion1, conversion2, 1)
 end
 
 function gamestates.thegame:update(dt)

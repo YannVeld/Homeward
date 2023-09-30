@@ -3,15 +3,14 @@ require("src/conversion")
 ConversionHandler = Class{
     __includes = {Instance},
 
-    init = function(self, pickupManager, grid, itemStorage, numOfConversionsAllowed)
+    init = function(self, pickupManager, grid, itemStorage, conversion1, conversion2, numOfConversionsAllowed)
         Instance.init(self)
 
         self.pickupManager = pickupManager
         self.grid = grid
         self.itemStorage = itemStorage
-        self.conversion1 = NewWeaponToGoldConversion()
-        --self.conversion2 = NewGoldToWeaponConversion()
-        self.conversion2 = GainSwordConversion()
+        self.conversion1 = conversion1
+        self.conversion2 = conversion2
 
         self.numOfConversionsAllowed = numOfConversionsAllowed
         self.numOfConversionsDone = 0
@@ -22,8 +21,8 @@ ConversionHandler = Class{
     update = function(self, dt)
         if self.numOfConversionsDone >= self.numOfConversionsAllowed then
             self.pickupManager:setItemLock(false)
-            OptionButton1:destroy()
-            OptionButton2:destroy()
+            if OptionButton1 then OptionButton1:destroy() end
+            if OptionButton2 then OptionButton2:destroy() end
             self:destroy()
         end
     end,
@@ -37,21 +36,25 @@ ConversionHandler = Class{
 
         local textColor = Colors.hexToRGB("#4B3D44")
 
-        OptionButton1 = Button(button1pos, buttonwidth, buttonheight)
-        OptionButton1:setText(self.conversion1.description, {color=textColor, ha="center", va="top"})
-        OptionButton1:setOnButtonReleased(function() self:performConversion(self.conversion1) end)
-        OptionButton1:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
-        OptionButton1:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
-        OptionButton1:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
-        OptionButton1:setDrawLayer(DrawLayers.Normal)
+        if self.conversion1 then
+            OptionButton1 = Button(button1pos, buttonwidth, buttonheight)
+            OptionButton1:setText(self.conversion1.description, {color=textColor, ha="center", va="top"})
+            OptionButton1:setOnButtonReleased(function() self:performConversion(self.conversion1) end)
+            OptionButton1:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
+            OptionButton1:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
+            OptionButton1:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
+            OptionButton1:setDrawLayer(DrawLayers.Normal)
+        end
 
-        OptionButton2 = Button(button2pos, buttonwidth, buttonheight)
-        OptionButton2:setText(self.conversion2.description, {color=textColor, ha="center", va="top"})
-        OptionButton2:setOnButtonReleased(function() self:performConversion(self.conversion2) end)
-        OptionButton2:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
-        OptionButton2:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
-        OptionButton2:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
-        OptionButton2:setDrawLayer(DrawLayers.Normal)
+        if self.conversion2 then
+            OptionButton2 = Button(button2pos, buttonwidth, buttonheight)
+            OptionButton2:setText(self.conversion2.description, {color=textColor, ha="center", va="top"})
+            OptionButton2:setOnButtonReleased(function() self:performConversion(self.conversion2) end)
+            OptionButton2:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
+            OptionButton2:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
+            OptionButton2:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
+            OptionButton2:setDrawLayer(DrawLayers.Normal)
+        end
     end,
 
     performConversion = function(self, conversion)
