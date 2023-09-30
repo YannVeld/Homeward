@@ -4,7 +4,7 @@ require("src/Instances/conversionHandler")
 require("src/Instances/infoScreenManager")
 require("src/Instances/itemStorage")
 require("src/Instances/sceneManager")
-require("src/scene")
+require("src/Scenes/scenes")
 
 require("src/items")
 

@@ -13,7 +13,7 @@ function love.load()
     SetupRandomSeed()
     SetupScreen()
     Shack:setDimensions(Push:getDimensions())
-    love.graphics.setFont(Fonts.m3x6)
+    SetupGameFont()
     input = GetInputs()
     camera = Camera()
     InitializeGameState()
@@ -56,6 +56,11 @@ function SetupScreen()
     Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, pixelperfect = false, resizable=false})
     --local windowWidth, windowHeight = love.window.getDesktopDimensions()
     --Push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = true})
+end
+
+function SetupGameFont()
+    Fonts.m3x6:setLineHeight(0.6)
+    love.graphics.setFont(Fonts.m3x6)
 end
 
 function InitializeGameState()
