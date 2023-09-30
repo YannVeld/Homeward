@@ -32,7 +32,8 @@ function gamestates.thegame:enter()
     pickupManager = ItemPickupManager()
 
     local pos = Vector(256, 16)
-    anItem = Item(pos, Sprites.greenSquare, 1, 1, pickupManager, myGrid)
+    local shape = {{0,0},{1,0}}
+    anItem = Item(pos, Sprites.greenSquare, shape, pickupManager, myGrid)
 end
 
 function gamestates.thegame:update(dt)
