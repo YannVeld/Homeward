@@ -5,8 +5,8 @@ require("src/GameStates")
 require("input")
 
 -- Initialization variables
-local initialGameState = gamestates.menu
-local gameWidth, gameHeight = 320, 180
+local initialGameState = gamestates.thegame
+local gameWidth, gameHeight = 320, 180 --1280, 720
 local windowToGameScale = 4
 
 function love.load()
@@ -20,6 +20,7 @@ function love.load()
 end
 
 function love.update(dt)
+    love.graphics.origin()
     Shack:update(dt)
     input:update()
     InstanceManager.update(dt)
