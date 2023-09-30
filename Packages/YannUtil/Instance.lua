@@ -12,6 +12,12 @@ Instance = Class{
     drawUI = function(self)
     end,
 
+    mousereleased = function(self, x, y, button, istouch, presses)
+    end,
+
+    mousepressed = function(self, x, y, button, istouch, presses)
+    end,
+
     destroy = function(self)
         InstanceManager.remove(self)
         self=nil

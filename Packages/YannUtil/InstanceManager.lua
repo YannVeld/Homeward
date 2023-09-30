@@ -31,6 +31,18 @@ InstanceManagerClass = Class{
         end
     end,
 
+    mousereleased = function(x, y, button, istouch, presses)
+        for i,instance in ipairs(InstanceManager.list) do
+            instance:mousereleased(x, y, button, istouch, presses)
+        end
+    end,
+
+    mousepressed = function(x, y, button, istouch, presses)
+        for i,instance in ipairs(InstanceManager.list) do
+            instance:mousepressed(x, y, button, istouch, presses)
+        end
+    end,
+
     removeAll = function()
         Lume.clear(InstanceManager.list)
     end,

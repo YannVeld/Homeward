@@ -37,6 +37,13 @@ function love.draw()
     Push:finish()
 end
 
+function love.mousereleased(x, y, button, istouch, presses)
+    InstanceManager.mousereleased(x, y, button, istouch, presses)
+end
+
+function love.mousepressed(x, y, button, istouch, presses)
+    InstanceManager.mousepressed(x, y, button, istouch, presses)
+end
 
 function SetupRandomSeed()
     love.math.setRandomSeed(love.timer.getTime())

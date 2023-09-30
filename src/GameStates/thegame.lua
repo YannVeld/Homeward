@@ -2,6 +2,9 @@ require("src/Instances/scoreManager")
 require("src/Instances/player")
 require("src/Instances/ball")
 
+require("src/Instances/Item")
+require("src/Instances/itemPickupManager")
+
 gamestates.thegame = {}
 
 function gamestates.thegame:enter()
@@ -25,22 +28,20 @@ function gamestates.thegame:enter()
     --ball = Ball(player1, player2)
 
     --scoreManager = ScoreManager()
+
+    pickupManager = ItemPickupManager()
+
+    local pos = Vector(256, 16)
+    anItem = Item(pos, Sprites.greenSquare, 1, 1, pickupManager)
 end
 
 function gamestates.thegame:update(dt)
-    --if love.keyboard.isDown("1") then
-    --    player1:destroy()
-    --end
-    --if love.keyboard.isDown("2") then
-    --    player2:destroy()
-    --end
+    --local mousex, mousey = Push:toGame(love.mouse.getPosition())
 
-    local mousex, mousey = Push:toGame(love.mouse.getPosition())
-
-    local i,j = myGrid:getGridIndex(mousex, mousey)
-    if myGrid:isGridIndex(i,j) then
-        myGrid:overwrite(i,j,true)
-    end
+    --local i,j = myGrid:getGridIndex(mousex, mousey)
+    --if myGrid:isGridIndex(i,j) then
+    --    myGrid:overwrite(i,j,true)
+    --end
 
 end
 
