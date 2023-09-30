@@ -39,7 +39,7 @@ function gamestates.thegame:enter()
     local pos = Vector(16, 64)
     local shape = {{0,0}}
     local basecell = 1
-    anItem2 = Item(pos, Sprites["1x1ItemsKnife"], Sprites["1x1ItemsWeapons"], Sprites["1x1ItemsHighlight"], shape, basecell, pickupManager, myGrid)
+    anItem2 = Item(pos, Sprites["1x1itemsKnife"], Sprites["1x1itemsWeapons"], Sprites["1x1itemsHighlight"], shape, basecell, pickupManager, myGrid)
 end
 
 function gamestates.thegame:update(dt)
