@@ -8,6 +8,8 @@ Pickupable = Class{
         self.width = width
         self.height = height
         self.pickupManager = pickupManager
+        self.canBeDropped = true
+        self.canBePickedUp = true
     end,
 
     update = function(self, dt)
@@ -49,10 +51,16 @@ Pickupable = Class{
 
     pickupOrDropMe = function(self)
         if pickupManager:isHolding(self) then
+            if not self.canBeDropped then
+                return
+            end
             pickupManager:dropItem()
             return
         end
 
+        if not self.canBePickedUp then
+            return
+        end
         pickupManager:pickupItem(self)
     end,
 

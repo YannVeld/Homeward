@@ -9,6 +9,10 @@ GridObject = Class{
         self.content = nil
     end,
 
+    getCenter = function(self)
+        return self.realPosition.x + self.width / 2, self.realPosition.y + self.height / 2
+    end,
+
     getContent = function(self)
         return self.content
     end,
