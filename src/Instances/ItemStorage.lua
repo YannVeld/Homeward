@@ -6,7 +6,7 @@ ItemStorage = Class{
     init = function(self, pickupManager)
         Instance.init(self)
 
-        self.position = Vector(79, 40)
+        self.position = Vector(79, 60)
         self.item = null
     end,
 
