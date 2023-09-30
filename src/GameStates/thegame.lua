@@ -5,6 +5,8 @@ require("src/Instances/ball")
 require("src/Instances/Item")
 require("src/Instances/itemPickupManager")
 
+require("src/items")
+
 gamestates.thegame = {}
 
 function gamestates.thegame:enter()
@@ -31,15 +33,8 @@ function gamestates.thegame:enter()
 
     pickupManager = ItemPickupManager()
 
-    local pos = Vector(16, 16)
-    local shape = {{0,0},{0,1},{0,2}}
-    local basecell = 2
-    anItem = Item(pos, Sprites["1x3itemsSword"], Sprites["1x3itemsWeapons"], Sprites["1x3itemsHighlight"], shape, basecell, pickupManager, myGrid)
-
-    local pos = Vector(16, 64)
-    local shape = {{0,0}}
-    local basecell = 1
-    anItem2 = Item(pos, Sprites["1x1itemsKnife"], Sprites["1x1itemsWeapons"], Sprites["1x1itemsHighlight"], shape, basecell, pickupManager, myGrid)
+    anItem = NewSwordItem(Vector(16, 16), pickupManager, myGrid)
+    anItem2 = NewKnifeItem(Vector(16, 64), pickupManager, myGrid)
 end
 
 function gamestates.thegame:update(dt)
