@@ -10,9 +10,10 @@ SceneManager = Class{
         self.grid = grid
         self.itemStorage = itemStorage
 
-        self.imagePosition = Vector(10,10)
+        --self.imagePosition = Vector(10,10)
+        self.imagePosition = Vector(12,8)
 
-        self.storyTexty = 8
+        self.storyTexty = 9
         self.storyTextx_noimage = 13
         self.storyTextx_withImage = 55
 
@@ -32,7 +33,7 @@ SceneManager = Class{
     draw = function(self)
 
         if self.curScene.image then
-            love.graphics.draw(Sprites.CharacterFrame, self.imagePosition:unpack())
+            love.graphics.draw(Sprites.CharacterFrameNoHeader, self.imagePosition:unpack())
             love.graphics.draw(self.curScene.image, self.imagePosition:unpack())
         end
 
@@ -91,7 +92,7 @@ SceneManager = Class{
         self.questionText = ""
 
         self.continueButton = Button(self.continueButtonPos, buttonwidth, buttonheight)
-        self.continueButton:setText("Continue", {color=textColor, ha="center", va="center"})
+        self.continueButton:setText("Continue", {color=textColor, ha="center", va="top"})
         self.continueButton:setOnButtonReleased(function() self:continueToNextScene(id) end)
         self.continueButton:setBackgroundSprites(Sprites.ContinueButton, Sprites.ContinueButtonHover, Sprites.ContinueButton, false)
         self.continueButton:setDrawLayer(DrawLayers.Normal)

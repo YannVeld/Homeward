@@ -4,34 +4,34 @@ require("src/itemTypes")
 require("src/items")
 
 function GetInitialScene()
-    return GetScene1()
+    return GetIntroScene1()
 end
 
-function GetScene1() 
+function GetIntroScene1() 
     return Scene(nil,
-                "Out hero starts their story here, in the town of Hazelwood.",
+                "Our hero starts their story in the small town of Hazelwood.",
                 "What do they have at their side?",
-                Conversion("Gain Weapon", {}, {NewSwordItem}),
-                "And so it begins...",
-                Conversion("Gain Gold", {}, {NewGoldItem}),
-                nil,
-                GetScene2, nil)
+                Conversion("A weapon", {}, {NewRandomWeapon}),
+                "And so it begins...\nClick on the weapon and move it to your bag on the right.",
+                Conversion("Gold", {}, {NewGoldItem}),
+                "And so it begins...\nClick on the gold and move it to your bag on the right.",
+                GetIntroScene2, nil)
 end
 
-function GetScene2()
+function GetIntroScene2()
     return Scene(Sprites.CharacterFrameBob,
-                "He immediately meets a humble merchant",
+                "They immediately meet a humble weapon merchant. Move an item on a button to use it.",
                 "What can I do for ye?",
-                Conversion("Weapon\n->\nGold", {ItemTypes.weapon}, {NewGoldItem}),
-                "A trade well done",
-                Conversion("Gold\n->\nWeapon", {ItemTypes.money}, {NewKnifeItem}),
+                Conversion("Sell", {ItemTypes.weapon}, {NewGoldItem}),
+                "A nice trade!\n(Don\'t forget to move items to your bag.)",
+                Conversion("Buy", {ItemTypes.money}, {NewKnifeItem}),
                 nil,
                 GetFlowerScene, nil)
 end
 
 
 function GetFlowerScene()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameForest,
                 "You find an interesting mushroom in the ground next to a big tree. Perhaps it is edible.",
                 "Pick it?",
                 Conversion("Yes", {}, {NewWeirdMushroomItem}),

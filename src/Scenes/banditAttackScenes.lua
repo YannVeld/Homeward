@@ -4,11 +4,11 @@ function GetBanditAttackInitialScene()
 end
 
 function _afterBanditAttackScene()
-    return GetScene1()
+    return GetIntroScene1()
 end
 
 function GetBanditAttackScene1()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameForest,
                 "You hear some screaming in the distance.",
                 "Go to investigate?",
                 Conversion("Yes", {}, {N}),
@@ -19,7 +19,7 @@ function GetBanditAttackScene1()
 end
 
 function GetBanditAttackScene2()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameForest,
                 "There is a group of bandits attacking a carriage. Now they are coming for you!",
                 "You will have to fight.",
                 Conversion("With a weapon", {ItemTypes.weapon}, {NewGoldItem}),
@@ -31,7 +31,7 @@ function GetBanditAttackScene2()
 end
 
 function GetBanditAttackScene3_win()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameForest,
                 "The merchants in the carriage are very gratefull.",
                 "\"Please take this\"",
                 Conversion("Take item", {}, {NewCakeItem}),
@@ -42,7 +42,7 @@ function GetBanditAttackScene3_win()
 end
 
 function GetBanditAttackScene3_loss()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameForest,
                 "Luckily all they take is some gold",
                 "Lose gold",
                 Conversion("Gold", {ItemTypes.money}, {}),

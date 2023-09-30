@@ -1,5 +1,8 @@
 require("src/itemTypes")
 
+
+-- Weapons
+
 NewSwordItem = function(position, pickupManager, grid, itemStorage)
     local name = "Sword"
     local shape = {{0,0},{0,1},{0,2}}
@@ -18,6 +21,16 @@ NewKnifeItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
+NewRandomWeapon = function(position, pickupManager, grid, itemStorage)
+    local fn = Lume.randomchoice({NewSwordItem, NewKnifeItem})
+    return fn(position, pickupManager, grid, itemStorage)
+end
+
+
+
+
+-- Gold
+
 NewGoldItem = function(position, pickupManager, grid, itemStorage)
     local name = "Gold"
     local shape = {{0,0}}
@@ -26,6 +39,10 @@ NewGoldItem = function(position, pickupManager, grid, itemStorage)
     item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsMoney"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
+
+
+
+-- Treasure
 
 NewRingItem = function(position, pickupManager, grid, itemStorage)
     local name = "Ring"
@@ -44,6 +61,12 @@ NewHugeGemItem = function(position, pickupManager, grid, itemStorage)
     item = Item(name, position, Sprites["1x1itemsGem"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
+
+
+
+
+
+-- Food
 
 NewWeirdMushroomItem = function(position, pickupManager, grid, itemStorage)
     local name = "Edible(?) Mushroom"
