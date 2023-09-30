@@ -10,11 +10,11 @@ gamestates.thegame = {}
 function gamestates.thegame:enter()
     InstanceManager.removeAll()
 
-    local pos = Vector(0,0)
-    local width = 5
-    local height = 5
-    local cellWidth = 36
-    local cellHeight = 36
+    local pos = Vector(166,19)
+    local width = 4
+    local height = 4
+    local cellWidth = 16
+    local cellHeight = 16
     myGrid = Grid(pos, width, height, cellWidth, cellHeight)
 
     --local playerDistFromEdge = 30
@@ -31,13 +31,15 @@ function gamestates.thegame:enter()
 
     pickupManager = ItemPickupManager()
 
-    local pos = Vector(256, 16)
-    local shape = {{0,0},{1,0},{0,1},{1,1}}
-    anItem = Item(pos, Sprites.greenSquare, shape, pickupManager, myGrid)
+    local pos = Vector(16, 16)
+    local shape = {{0,0},{0,1},{0,2}}
+    local basecell = 2
+    anItem = Item(pos, Sprites["1x3itemsSword"], Sprites["1x3itemsWeapons"], shape, basecell, pickupManager, myGrid)
 
-    local pos = Vector(256, 128)
-    local shape = {{-1,0}, {0,0},{1,0}, {0,1}}
-    anItem2 = Item(pos, Sprites.redSquare, shape, pickupManager, myGrid)
+    local pos = Vector(16, 64)
+    local shape = {{0,0}}
+    local basecell = 1
+    anItem2 = Item(pos, Sprites["1x1ItemsKnife"], Sprites["1x1ItemsWeapons"], shape, basecell, pickupManager, myGrid)
 end
 
 function gamestates.thegame:update(dt)
@@ -61,5 +63,5 @@ function gamestates.thegame:keyreleased(key, code)
 end
 
 function gamestates.thegame:draw()
-    myGrid:draw()
+    --myGrid:draw()
 end

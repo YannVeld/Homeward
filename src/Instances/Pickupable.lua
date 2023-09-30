@@ -15,15 +15,15 @@ Pickupable = Class{
     update = function(self, dt)
         if self:isPickedUp() then
             local mousex, mousey = Push:toGame(love.mouse.getPosition())
-            self.position = Vector(mousex, mousey)
+            self.position = Vector(mousex - self.width/2, mousey - self.height/2)
         end
     end,
 
     posIsOnItem = function(self, x, y)
         --local mousex, mousey = Push:toGame(love.mouse.getPosition())
 
-        local leftedge = self.position.x - self.width/2
-        local topedge = self.position.y - self.height/2
+        local leftedge = self.position.x
+        local topedge = self.position.y
         local rightedge = leftedge + self.width
         local bottomedge = topedge + self.height
 
@@ -41,19 +41,14 @@ Pickupable = Class{
             return
         end
 
-        local mousex, mousey = Push:toGame(x, y)
-        if not self:posIsOnItem(mousex, mousey) then
-            return
-        end
-
-        self:pickupOrDropMe()
-    end,
-
-    pickupOrDropMe = function(self)
         if pickupManager:isHolding(self) then
             return self:dropMe()
         end
-        return self:pickupMe()
+
+        local mousex, mousey = Push:toGame(x, y)
+        if self:posIsOnItem(mousex, mousey) then
+            return self:pickupMe()
+        end
     end,
 
     pickupMe = function(self)

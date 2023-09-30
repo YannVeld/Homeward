@@ -3,15 +3,16 @@ require("src/Instances/Pickupable")
 Item = Class{
     __includes = {Pickupable},
 
-    init = function(self, position, sprite, shape, pickupManager, itemGrid)
-        self.sprite = sprite
+    init = function(self, position, sprite, backgroundsprite, shape, basecell, pickupManager, itemGrid)
+        self.itemsprite = sprite
+        self.backgroundsprite = backgroundsprite
         self.shape = shape
+        self.basecell = basecell
         self.itemGrid = itemGrid
 
-        local width, height = self:getItemSize()
-        width = width * self.itemGrid.cellWidth 
-        height = height * self.itemGrid.cellHeight 
-
+        self.cellsWide, self.cellsHigh = self:getItemSize()
+        local width = self.cellsWide * self.itemGrid.cellWidth 
+        local height = self.cellsHigh * self.itemGrid.cellHeight 
         Pickupable.init(self, position, width, height, pickupManager)
 
 
@@ -29,11 +30,14 @@ Item = Class{
     end,
 
     draw = function(self)
-        for i,pos in ipairs(self.shape) do
-            local xpos = self.position.x + pos[1] * self.itemGrid.cellWidth - self.sprite:getWidth() / 2
-            local ypos = self.position.y + pos[2] * self.itemGrid.cellHeight - self.sprite:getHeight() / 2
-            love.graphics.draw(self.sprite, xpos, ypos)
-        end
+        love.graphics.draw(self.backgroundsprite, self.position.x, self.position.y)
+        love.graphics.draw(self.itemsprite, self.position.x, self.position.y)
+
+        --for i,pos in ipairs(self.shape) do
+        --    local xpos = self.position.x + pos[1] * self.itemGrid.cellWidth - self.sprite:getWidth() / 2
+        --    local ypos = self.position.y + pos[2] * self.itemGrid.cellHeight - self.sprite:getHeight() / 2
+        --    love.graphics.draw(self.sprite, xpos, ypos)
+        --end
     end,
 
     mousereleased = function(self, x, y, button, istouch, presses)
@@ -73,7 +77,7 @@ Item = Class{
         end
 
         if self:isPickedUp() then
-            self:putOnGrid(i,j)
+            self:putOnGrid(i - self.shape[self.basecell][1], j - self.shape[self.basecell][2])
         end
     end,
 
@@ -125,12 +129,16 @@ Item = Class{
         local mouseIsOnGrid =  self.itemGrid:isGridIndex(i,j)
 
         if not mouseIsOnGrid then
-            self.position = Vector(mousex, mousey)
+            local posx = mousex - (self.shape[self.basecell][1] + 0.5) * self.itemGrid.cellWidth
+            local posy = mousey - (self.shape[self.basecell][2] + 0.5) * self.itemGrid.cellHeight
+            self.position = Vector(posx, posy)
             return
         end
 
-        local gridx, gridy = self.itemGrid:getCenter(i,j)
-        self.position = Vector(gridx, gridy)
+        local gridx, gridy = self.itemGrid:getPosition(i,j)
+        local posx = gridx - self.shape[self.basecell][1] * self.itemGrid.cellWidth
+        local posy = gridy - self.shape[self.basecell][2] * self.itemGrid.cellHeight
+        self.position = Vector(posx, posy)
     end,
 
     canPutOnGrid = function(self, i, j)
