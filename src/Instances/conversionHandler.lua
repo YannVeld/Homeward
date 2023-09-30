@@ -3,7 +3,7 @@ require("src/conversion")
 ConversionHandler = Class{
     __includes = {Instance},
 
-    init = function(self, pickupManager, grid, itemStorage, conversion1, conversion2, numOfConversionsAllowed)
+    init = function(self, pickupManager, grid, itemStorage, conversion1, conversion2)
         Instance.init(self)
 
         self.pickupManager = pickupManager
@@ -12,19 +12,7 @@ ConversionHandler = Class{
         self.conversion1 = conversion1
         self.conversion2 = conversion2
 
-        self.numOfConversionsAllowed = numOfConversionsAllowed
-        self.numOfConversionsDone = 0
-
         self:createOptionButtons()
-    end,
-
-    update = function(self, dt)
-        if self.numOfConversionsDone >= self.numOfConversionsAllowed then
-            self.pickupManager:setItemLock(false)
-            if OptionButton1 then OptionButton1:destroy() end
-            if OptionButton2 then OptionButton2:destroy() end
-            self:destroy()
-        end
     end,
 
     createOptionButtons = function(self)
@@ -58,9 +46,6 @@ ConversionHandler = Class{
     end,
 
     performConversion = function(self, conversion)
-        if self.numOfConversionsDone >= self.numOfConversionsAllowed then
-            return false
-        end
         if not self.itemStorage:isEmpty() then
             return false
         end
@@ -73,7 +58,7 @@ ConversionHandler = Class{
             for i, fn in ipairs(conversion.outItems) do
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
             end
-            self.numOfConversionsDone = self.numOfConversionsDone + 1
+            self:didConversion(1)
             return true
         end
         
@@ -89,7 +74,7 @@ ConversionHandler = Class{
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
                 self.itemStorage:putInStorage(item)
             end
-            self.numOfConversionsDone = self.numOfConversionsDone + 1
+            self:didConversion(2)
             return true
         end
         return false
@@ -102,5 +87,13 @@ ConversionHandler = Class{
             end
         end
         return false
+    end,
+
+    didConversion = function(self, convid)
+        self.pickupManager:setItemLock(false)
+        if OptionButton1 then OptionButton1:destroy() end
+        if OptionButton2 then OptionButton2:destroy() end
+        Signal.emit("conversionsDone", convid)
+        self:destroy()
     end,
 }

@@ -3,6 +3,8 @@ require("src/Instances/itemPickupManager")
 require("src/Instances/conversionHandler")
 require("src/Instances/infoScreenManager")
 require("src/Instances/itemStorage")
+require("src/Instances/sceneManager")
+require("src/scene")
 
 require("src/items")
 
@@ -22,9 +24,12 @@ function gamestates.thegame:enter()
     infoScreenManager = InfoScreenManager(pickupManager)
     itemStorage = ItemStorage()
 
-    local conversion1 = GainGoldConversion()
-    local conversion2 = GainSwordConversion()
-    conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage, conversion1, conversion2, 1)
+    local initialScene = GetInitialScene()
+    sceneManager = SceneManager(initialScene, pickupManager, myGrid, itemStorage)
+
+    --local conversion1 = GainGoldConversion()
+    --local conversion2 = GainSwordConversion()
+    --conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage, conversion1, conversion2)
 end
 
 function gamestates.thegame:update(dt)

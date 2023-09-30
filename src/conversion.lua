@@ -9,11 +9,11 @@ Conversion = Class{
     end,
 }
 
-NewWeaponToGoldConversion = function(self)
+WeaponToGoldConversion = function(self)
     return Conversion("Weapon\n->\nGold", {ItemTypes.weapon}, {NewGoldItem})
 end
 
-NewGoldToWeaponConversion = function(self)
+GoldToWeaponConversion = function(self)
     return Conversion("Gold\n->\nWeapon", {ItemTypes.money}, {NewKnifeItem})
 end
 
