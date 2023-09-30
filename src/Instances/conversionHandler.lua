@@ -3,13 +3,15 @@ require("src/conversion")
 ConversionHandler = Class{
     __includes = {Instance},
 
-    init = function(self, pickupManager, grid)
+    init = function(self, pickupManager, grid, itemStorage)
         Instance.init(self)
 
         self.pickupManager = pickupManager
         self.grid = grid
+        self.itemStorage = itemStorage
         self.conversion1 = NewWeaponToGoldConversion()
-        self.conversion2 = NewGoldToWeaponConversion()
+        --self.conversion2 = NewGoldToWeaponConversion()
+        self.conversion2 = GainSwordConversion()
 
         self:createOptionButtons()
     end,
@@ -41,20 +43,31 @@ ConversionHandler = Class{
     end,
 
     performConversion = function(self, conversion)
+        if not self.itemStorage:isEmpty() then
+            return false
+        end
+        
+        if #conversion.inTypes == 0 then
+            for i, fn in ipairs(conversion.outItems) do
+                local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
+            end
+            return true
+        end
+        
         if self.pickupManager:isEmpty() then
             return false
         end
-
-        local newItemPosition = Vector(16,16)
 
         local itemInHand = self.pickupManager.pickedupItem
 
         if self.checkForMatchingTypes(conversion.inTypes, itemInHand.types) then
             for i, fn in ipairs(conversion.outItems) do
                 itemInHand:destroy()
-                local item = fn(newItemPosition, self.pickupManager, self.grid)
+                local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
             end
+            return true
         end
+        return false
     end,
 
     checkForMatchingTypes = function(typeLst1, typeLst2)

@@ -2,6 +2,7 @@ require("src/Instances/Item")
 require("src/Instances/itemPickupManager")
 require("src/Instances/conversionHandler")
 require("src/Instances/infoScreenManager")
+require("src/Instances/itemStorage")
 
 require("src/items")
 
@@ -18,11 +19,12 @@ function gamestates.thegame:enter()
     myGrid = Grid(pos, width, height, cellWidth, cellHeight)
     
     pickupManager = ItemPickupManager()
-    conversionHandler = ConversionHandler(pickupManager, myGrid)
     infoScreenManager = InfoScreenManager(pickupManager)
+    itemStorage = ItemStorage()
+    conversionHandler = ConversionHandler(pickupManager, myGrid, itemStorage)
 
-    anItem = NewSwordItem(Vector(64, 16), pickupManager, myGrid)
-    anItem2 = NewGoldItem(Vector(96, 16), pickupManager, myGrid)
+    anItem = NewSwordItem(Vector(64, 16), pickupManager, myGrid, itemStorage)
+    --anItem2 = NewGoldItem(Vector(96, 16), pickupManager, myGrid, itemStorage)
 end
 
 function gamestates.thegame:update(dt)

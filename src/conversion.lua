@@ -16,3 +16,7 @@ end
 NewGoldToWeaponConversion = function(self)
     return Conversion("Gold\n->\nWeapon", {ItemTypes.money}, {NewKnifeItem})
 end
+
+GainSwordConversion = function(self)
+    return Conversion("Gain Weapon", {}, {NewSwordItem})
+end

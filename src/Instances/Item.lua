@@ -4,7 +4,7 @@ require("src/itemTypes")
 Item = Class{
     __includes = {Pickupable},
 
-    init = function(self, name, position, sprite, backgroundsprite, highlightsprite, shape, basecell, types, pickupManager, itemGrid)
+    init = function(self, name, position, sprite, backgroundsprite, highlightsprite, shape, basecell, types, pickupManager, itemGrid, itemStorage)
         self.name = name
         self.itemsprite = sprite
         self.backgroundsprite = backgroundsprite
@@ -12,6 +12,7 @@ Item = Class{
         self.shape = shape
         self.basecell = basecell
         self.itemGrid = itemGrid
+        self.itemStorage = itemStorage
         self.types = types
 
         self.cellsWide, self.cellsHigh = self:getItemSize()
@@ -28,6 +29,8 @@ Item = Class{
     end,
 
     update = function(self, dt)
+        self:whenDroppingOutsideGrid()
+        self:putInStorageWhenDroppedOutsideGrid()
         if self:isPickedUp() then
             self:moveWithMouse()
         end
@@ -59,6 +62,9 @@ Item = Class{
         self:removeFromGrid()
         if self.pickupManager:isHolding(self) then
             self.pickupManager.pickedupItem = nil
+        end
+        if self.itemStorage.item == self then
+            self.itemStorage:emptyStorage()
         end
         
         Instance.destroy(self)
@@ -204,5 +210,38 @@ Item = Class{
     isOfType = function(self, type)
         local times = Lume.find(self.types, type)
         return times > 0
+    end,
+
+    whenDroppingOutsideGrid = function(self)
+        if self.itemStorage:isEmpty() then
+            self.canBeDropped = true
+            return
+        end
+
+        local mousex, mousey = Push:toGame(love.mouse.getPosition())
+        local i,j = self.itemGrid:getGridIndex(mousex, mousey)
+        local mouseIsOnGrid = self.itemGrid:isGridIndex(i,j)
+
+        self.canBeDropped = true
+        if not mouseIsOnGrid then
+            self.canBeDropped = false
+        end
+    end,
+
+    putInStorageWhenDroppedOutsideGrid = function(self)
+        if self:isOnGrid() then
+            return
+        end
+        if self:isPickedUp() then
+            return
+        end
+        if self.itemStorage.item == self then
+            return
+        end
+        local succes = self.itemStorage:putInStorage(self)
+
+        if not succes then
+            print("WARNING: item outside grid and storage!")
+        end
     end,
 }
