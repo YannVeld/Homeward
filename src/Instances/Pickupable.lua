@@ -37,31 +37,37 @@ Pickupable = Class{
     end,
 
     mousereleased = function(self, x, y, button, istouch, presses)
-        local mousex, mousey = Push:toGame(x, y)
+        if not button == 1 then
+            return
+        end
 
+        local mousex, mousey = Push:toGame(x, y)
         if not self:posIsOnItem(mousex, mousey) then
             return
         end
 
-        if button == 1 then
-            self:pickupOrDropMe()
-        end
-
+        self:pickupOrDropMe()
     end,
 
     pickupOrDropMe = function(self)
         if pickupManager:isHolding(self) then
-            if not self.canBeDropped then
-                return
-            end
-            pickupManager:dropItem()
-            return
+            return self:dropMe()
         end
+        return self:pickupMe()
+    end,
 
+    pickupMe = function(self)
         if not self.canBePickedUp then
-            return
+            return false
         end
-        pickupManager:pickupItem(self)
+        return pickupManager:pickupItem(self)
+    end,
+
+    dropMe = function(self)
+        if not self.canBeDropped then
+            return false
+        end
+        return pickupManager:dropItem()
     end,
 
     isPickedUp = function(self)
