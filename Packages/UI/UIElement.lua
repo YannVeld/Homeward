@@ -1,3 +1,4 @@
+DrawLayers = {Normal=1, UI=2}
 
 UIElement = Class{
     __includes = {Instance},
@@ -8,6 +9,8 @@ UIElement = Class{
         self.position = position
         self.width = width
         self.height = height
+
+        self.drawLayer = DrawLayers.UI
 
         -- Background settings
         self.backgroundcolor = Colors.white
@@ -22,6 +25,10 @@ UIElement = Class{
         self.textcolor = Colors.black
         self.textha = "center"
         self.textva = "center"
+    end,
+
+    setDrawLayer = function(self, layer)
+        self.drawLayer = layer
     end,
 
     setBackgroundColor = function(self, color)
@@ -110,7 +117,7 @@ UIElement = Class{
         end
     end,
 
-    drawUI = function(self)
+    drawElement = function(self)
         -- Draw background
         if self.backgroundvisible then
             love.graphics.setColor(self.backgroundcolor)
@@ -137,5 +144,17 @@ UIElement = Class{
         local ypos = self:_getTextyPos()
         love.graphics.draw(self.text, xpos, ypos)
         love.graphics.setColor(Colors.white)
+    end,
+
+    drawUI = function(self)
+        if self.drawLayer == DrawLayers.UI then
+            self:drawElement()
+        end
+    end,
+
+    draw = function(self)
+        if self.drawLayer == DrawLayers.Normal then
+            self:drawElement()
+        end
     end,
 }

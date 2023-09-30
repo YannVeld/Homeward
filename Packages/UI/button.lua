@@ -4,14 +4,18 @@ Button = Class{
     init = function(self, position, width, height)
         UIElement.init(self, position, width, height)
 
-        self._buttonHovered = false
         self._buttonHeld = false
         self._buttonPressed = false
         self._buttonReleased = false
+        self._buttonHovered = false
+        self._buttonHoverStarted = false
+        self._buttonHoverEnded = false
         self._onButtonHeld = function() end
         self._onButtonPressed = function() end
         self._onButtonReleased = function() end
         self._onButtonHovered = function() end
+        self._onButtonHoverStart = function() end
+        self._onButtonHoverEnd = function() end
 
         self._normalColor = Colors.white
         self._hoveredColor = Colors.grey
@@ -23,7 +27,8 @@ Button = Class{
     end,
 
     update = function(self, dt)
-        self:_updateButtonVars()
+        self:_updateButtonPressVars()
+        self:_updateButtonHoverVars()
         self:_checkInvokeFunction()
         self:_checkBackgroundColors()
         self:_checkBackgroundSprites()
@@ -40,6 +45,12 @@ Button = Class{
     end,
     setOnButtonHovered = function(self, onButtonHovered)
         self._onButtonHovered = onButtonHovered
+    end,
+    setOnButtonHoverStart = function(self, onButtonHoverStart)
+        self._onButtonHoverStart = onButtonHoverStart
+    end,
+    setOnButtonHoverEnd = function(self, onButtonHoverEnd)
+        self._onButtonHoverEnd = onButtonHoverEnd
     end,
 
     setBackgroundColors = function(self, normalColor, hoveredColor, heldColor)
@@ -58,11 +69,9 @@ Button = Class{
         self:setBackgroundVisibility(false)
     end,
 
-    _updateButtonVars = function(self)
-        self._buttonHovered = self:mouseIsHovering()
+    _updateButtonPressVars = function(self)
         self._buttonPressed = false
         self._buttonReleased = false
-
         local holdingButton = self:_checkButtonHeld()
 
         -- If the button is being held
@@ -79,6 +88,27 @@ Button = Class{
             self._buttonReleased = true
         end
         self._buttonHeld = false
+    end,
+
+    _updateButtonHoverVars = function(self)
+        self._buttonHoverStarted = false
+        self._buttonHoverEnded = false
+        local hoveringButton = self:mouseIsHovering()
+
+        -- If the button is being hovered
+        if hoveringButton then
+            if not self._buttonHovered then
+                self._buttonHoverStarted = true
+            end
+            self._buttonHovered = true
+            return
+        end
+
+        -- If the button is not being hovered
+        if self._buttonHovered then
+            self._buttonHoverEnded = true
+        end
+        self._buttonHovered = false
     end,
 
     _checkButtonHeld = function(self, button)
@@ -98,6 +128,8 @@ Button = Class{
         if self._buttonReleased then self._onButtonReleased() end
         if self._buttonHeld then self._onButtonHeld() end
         if self._buttonHovered then self._onButtonHovered() end
+        if self._buttonHoverStarted then self._onButtonHoverStart() end
+        if self._buttonHoverEnded then self._onButtonHoverEnd() end
     end,
 
     _checkBackgroundColors = function(self)
