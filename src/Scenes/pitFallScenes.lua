@@ -30,7 +30,8 @@ function PitfallScene2()
                 Conversion("Nothing\nto lose", {}, {}, function() return not BagHasItems() end),
                 "You had nothing to lose.",
                 PitfallScene3, nil,
-                nil, nil)
+                nil, nil,
+                caveinSound)
 end
 
 function PitfallScene3()

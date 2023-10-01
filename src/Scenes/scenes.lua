@@ -11,10 +11,13 @@ function SetupSceneSounds()
     superGainItemSound:setVolume(SoundsVolume)
 
     winSound = love.audio.newSource("Sounds/Win.wav", "static")
-    winSound:setVolume(SoundsVolume)
+    winSound:setVolume(SoundsVolume + 1.0)
 
     loseSound = love.audio.newSource("Sounds/Loss.wav", "static")
     loseSound:setVolume(SoundsVolume + 1.0)
+
+    caveinSound = love.audio.newSource("Sounds/Cavein.wav", "static")
+    caveinSound:setVolume(SoundsVolume)
 end
 
 function GetInitialScene()
@@ -77,17 +80,30 @@ end
 
 function GetEndingScene()
     return Scene(Sprites.CharacterFrameForest,
-                "That is the entire story so far unfortunately.",
-                "Continue from beginning?",
-                Conversion("Yes", {}, {}),
-                "Good luck!",
-                nil,
+                "Thank you for playing!\nThe total value of all items in your bag is: \n  "..GetTotalBagValue().."\n\nCan you get more on a second playthrough?",
                 "",
-                GetInitialScene, nil,
+                Conversion("Restart", {}, {}),
+                "Good luck!",
+                Conversion("Quit", {}, {}),
+                "Thanks again for playing!",
+                GetInitialScene, QuitGameScene,
                 nil, nil,
                 winSound)
 end
 
+function QuitGameScene()
+    return Scene(nil,
+                "",
+                "",
+                nil,
+                "",
+                nil,
+                "",
+                nil, nil,
+                nil, nil,
+                nil,
+                function() love.event.quit() end)
+end
 
 
 
@@ -96,7 +112,7 @@ function GetDeathScene()
                 "You have perished.\n\nWould you like to retry from the beginning?",
                 "",
                 Conversion("Yes", {}, {}),
-                "You can learn from each death.\nGood luck!",
+                "You can learn from each death.\n\nGood luck!",
                 nil,
                 nil,
                 GetInitialScene, nil,

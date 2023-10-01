@@ -5,7 +5,7 @@ end
 
 function GetAbondonnedCastleScene1()
     return Scene(Sprites.CharacterFrameForest,
-                "In front of you lies an abondenned castle. The only way forward is through it. Will you camp inside or outside the castle?",
+                "In front of you lies an abandonned castle. The only way forward is through it. Will you camp inside or outside the castle?",
                 "",
                 Conversion("Inside", {}, {}),
                 "What if it will rain?",
@@ -43,7 +43,7 @@ function GetAbondonnedCastleScene2_outside2()
     return Scene(Sprites.CharacterFrameForest,
                 "The merchant warns you of walking dead in the castle. He advises to scare them with mushrooms.",
                 "Would you like to sell anything?",
-                Conversion("Sell\nany item", {AllItemTypes}, {NewGoldItem}),
+                Conversion("Sell\nany item", AllItemTypes, {NewGoldItem}),
                 "What a kind person!",
                 Conversion("No", {}, {}),
                 "What a kind person!",
