@@ -6,15 +6,15 @@ require("src.items")
 function SetupSceneSounds()
     gainItemSound = love.audio.newSource("Sounds/gain1.wav", "static")
     gainItemSound:setVolume(SoundsVolume)
-    
+
     superGainItemSound = love.audio.newSource("Sounds/supergain.wav", "static")
     superGainItemSound:setVolume(SoundsVolume)
-    
+
     winSound = love.audio.newSource("Sounds/Win.wav", "static")
     winSound:setVolume(SoundsVolume)
-    
+
     loseSound = love.audio.newSource("Sounds/Loss.wav", "static")
-    loseSound:setVolume(SoundsVolume)
+    loseSound:setVolume(SoundsVolume + 1.0)
 end
 
 function GetInitialScene()
@@ -86,7 +86,6 @@ function GetEndingScene()
                 GetInitialScene, nil,
                 nil, nil,
                 winSound)
-
 end
 
 
@@ -94,13 +93,14 @@ end
 
 function GetDeathScene()
     return Scene(Sprites.CharacterFrameDeath,
-                "You have perished.\nWould you like to retry from the beginning?",
+                "You have perished.\n\nWould you like to retry from the beginning?",
                 "",
                 Conversion("Yes", {}, {}),
                 "You can learn from each death.\nGood luck!",
                 nil,
                 nil,
                 GetInitialScene, nil,
+                nil, nil,
                 loseSound)
 end
 
