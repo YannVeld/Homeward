@@ -1,8 +1,8 @@
 require("src.Instances.Item")
-require("src.Instances.itemPickupManager")
+require("src.Instances.ItemPickupManager")
 require("src.Instances.conversionHandler")
 require("src.Instances.infoScreenManager")
-require("src.Instances.itemStorage")
+require("src.Instances.ItemStorage")
 require("src.Instances.sceneManager")
 require("src.Scenes")
 
