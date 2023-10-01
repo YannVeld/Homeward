@@ -18,9 +18,9 @@ end
 
 function GetFairyScene2()
     return Scene(Sprites.CharacterFrameForest,
-                "The fairy floats up and looks curiously at your face.\n\"Can you give me a present?\"",
-                "Give her something?",
-                Conversion("?", {ItemTypes.gem}, {NewFlowerItem}),
+                "The fairy floats up and looks curiously at your face.\n\"Can you give me a shiny present?\"",
+                "Give her something? A gem perhaps?",
+                Conversion("Give a gem", {ItemTypes.gem}, {NewFlowerItem}),
                 "\"Oh, so pretty! I will keep it, hihi. You can have this!\"\nshe says, before disappearing into the forest.",
                 Conversion("No", {}, {}),
                 "You see the fairy starting to cry. You feel your mind getting fuzzy. Was this a mistake?",

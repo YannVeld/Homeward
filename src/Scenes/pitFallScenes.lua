@@ -38,7 +38,7 @@ function PitfallScene3()
     return Scene(Sprites.CharacterFrameCave,
                 "After walking for a while in this dark tunnel you start to get very hungry.",
                 "Eat something",
-                Conversion("Some food", {ItemTypes.food}, {}),
+                Conversion("Eat food", {ItemTypes.food}, {}),
                 "Delicious! With renewed energy you continue through the cave.",
                 Conversion("Eat nothing", {}, {}),
                 "You keep getting more and more hungry, but cannot find a way out...",
@@ -60,10 +60,10 @@ end
 
 function ExitPitfallScene()
     return Scene(Sprites.CharacterFrameForest,
-                "You safely make it out of the cave.",
-                "Let's continue!",
-                Conversion("Go!", {}, {}),
-                "Nice to be out in the sun again.",
+                "",
+                "",
+                nil,
+                "You safely make it out of the cave. It's nice to be out in the sun again.",
                 nil,
                 "",
                 _afterPitfallScene, nil,

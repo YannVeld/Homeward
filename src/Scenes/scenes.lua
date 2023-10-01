@@ -58,7 +58,19 @@ function MeetWizardScene()
 end
 
 function _afterBanditAttackScene()
-    return GetAbondonnedCastleInitialScene()
+    return MeetRichPerson()
+end
+
+function MeetRichPerson()
+    return Scene(Sprites.CharacterFrameForest,
+                "As you walk the forest you meet a woman in a fancy dress in a carriage.\n\"Hey you, give me some food please. We ran out.\"",
+                "",
+                Conversion("Give her food", {ItemTypes.food}, {NewRedGemItem}),
+                "\"Here have this in return.\"",
+                Conversion("Ignore her", {}, {}),
+                "\"Ugh\"",
+                GetAbondonnedCastleInitialScene, nil,
+                gainItemSound, nil)
 end
 
 function _afterAbondonnedCastleScene()
@@ -74,23 +86,10 @@ function _afterFairyScene()
 end
 
 function _afterHuntersHutScene()
-    return GetEndingScene()
+    return GetEndingInitialScene()
 end
 
 
-
-function GetEndingScene()
-    return Scene(Sprites.CharacterFrameForest,
-                "Thank you for playing!\nThe total value of all items in your bag is: \n  "..GetTotalBagValue().."\n\nCan you get more on a second playthrough?",
-                "",
-                Conversion("Restart", {}, {}),
-                "Good luck!",
-                Conversion("Quit", {}, {}),
-                "Thanks again for playing!",
-                GetInitialScene, QuitGameScene,
-                nil, nil,
-                winSound)
-end
 
 function QuitGameScene()
     return Scene(nil,
