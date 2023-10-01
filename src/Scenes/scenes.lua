@@ -48,6 +48,10 @@ function _afterAbondonnedCastleScene()
 end
 
 function _afterFairyScene()
+    return GetHuntersHutInitialScene()
+end
+
+function _afterHuntersHutScene()
     return GetEndingScene()
 end
 

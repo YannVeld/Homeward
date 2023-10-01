@@ -117,7 +117,7 @@ NewBoneItem = function(position, pickupManager, grid, itemStorage)
     local value = 5
     local shape = {{0,0}, {1,0}}
     local basecell = 1
-    local types = {ItemTypes.treasure}
+    local types = {ItemTypes.treasure, ItemTypes.bone}
     item = Item(name, value, position, Sprites["2x1itemsBone"], Sprites["2x1itemsTreasure"], Sprites["2x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
@@ -186,6 +186,16 @@ NewBreadItem = function(position, pickupManager, grid, itemStorage)
     local basecell = 1
     local types = {ItemTypes.food}
     item = Item(name, value, position, Sprites["2x1itemsBread"], Sprites["2x1itemsFood"], Sprites["2x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewMeatItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Meat"
+    local value = 50
+    local shape = {{0,0}, {1,0}, {0,1}, {1,1}}
+    local basecell = 1
+    local types = {ItemTypes.food}
+    item = Item(name, value, position, Sprites["2x2itemsMeat"], Sprites["2x2itemsFood"], Sprites["2x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
 
