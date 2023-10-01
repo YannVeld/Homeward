@@ -44,7 +44,7 @@ function GetBanditAttackScene3_loss()
                 "Lose gold",
                 Conversion("Gold", {ItemTypes.money}, {}),
                 "That was scary.",
-                Conversion("Nothing", {}, {}, function() return not sceneManager:playerHasType(ItemTypes.money) end),
+                Conversion("Nothing", {}, {}, function() return not BagHasType(ItemTypes.money) end),
                 "You had nothing of interest.",
                 _afterBanditAttackScene, nil)
 end

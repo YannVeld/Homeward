@@ -69,7 +69,22 @@ GetTotalBagValue = function(self)
     return totalValue
 end
 
-ClearTheBag = function(self)
+BagHasType = function(itemType)
+    for i=1, myGrid.cellsWide do
+        for j=1, myGrid.cellsHigh do
+            local obj = myGrid:getContent(i,j)
+            if obj then
+                local hasType = Lume.find(obj.types, itemType)
+                if hasType then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+ClearTheBag = function()
     for i=1, myGrid.cellsWide do
         for j=1, myGrid.cellsHigh do
             local obj = myGrid:getContent(i,j)
@@ -80,6 +95,6 @@ ClearTheBag = function(self)
     end
 end
 
-BagHasItems = function(self)
+BagHasItems = function()
     return myGrid:hasItems()
 end

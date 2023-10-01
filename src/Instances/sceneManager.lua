@@ -140,19 +140,5 @@ SceneManager = Class{
         self.continueButton:setText(str, {color=textColor, ha="center", va="top"})
     end,
 
-    playerHasType = function(self, itemType)
-        for i=1, self.grid.cellsWide do
-            for j=1, self.grid.cellsHigh do
-                local obj = self.grid:getContent(i,j)
-                if obj then
-                    local hasType = Lume.find(obj.types, itemType)
-                    if hasType then
-                        return true
-                    end
-                end
-            end
-        end
-        return false
-    end,
 
 }
