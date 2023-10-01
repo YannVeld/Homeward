@@ -30,16 +30,42 @@ function GetBeginningScene2()
                 gainItemSound, gainItemSound)
 end
 
+function _putGoldInStorage()
+    local gold = NewRandomGold(itemStorage.position, pickupManager, myGrid, itemStorage)
+    itemStorage:putInStorage(gold)
+end
+
 function GetBeginningScene3()
     return Scene(nil,
-                "Some money could also be useful.",
                 "",
-                Conversion("Gold!", {}, {NewRandomGold}),
-                "I guess that is it. Let's depart on a journey!",
+                "",
+                nil,
+                "You should also bring a bit of money.",
+                nil,
+                nil,
+                GetBeginningScene3_2, nil,
+                nil, nil,
+                gainItemSound,
+                function() _putGoldInStorage() end)
+end
+
+function _putFoodInStorage()
+    local food = NewRandomHomeFoodItem(itemStorage.position, pickupManager, myGrid, itemStorage)
+    itemStorage:putInStorage(food)
+end
+
+function GetBeginningScene3_2()
+    return Scene(nil,
+                "",
+                "",
+                nil,
+                "And a bit of food. That is it. Let's depart on a journey!",
                 nil,
                 nil,
                 GetBeginningScene4, nil,
-                gainItemSound, nil)
+                nil, nil,
+                gainItemSound,
+                function() _putFoodInStorage() end)
 end
 
 function GetBeginningScene4()

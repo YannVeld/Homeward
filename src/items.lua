@@ -213,6 +213,11 @@ NewMeatItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
+NewRandomHomeFoodItem = function(position, pickupManager, grid, itemStorage)
+    local fn = Lume.randomchoice({NewFruitItem, NewBreadItem})
+    return fn(position, pickupManager, grid, itemStorage)
+end
+
 NewPotionRedItem = function(position, pickupManager, grid, itemStorage)
     local name = "Red Potion"
     local value = 25
