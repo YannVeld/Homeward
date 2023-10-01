@@ -5,6 +5,7 @@ require("src.items")
 
 function GetInitialScene()
     return GetBeginningScene1()
+    --return GetTestScene()
 end
 
 function _afterBeginningScene()
@@ -45,16 +46,16 @@ function GetDeathScene()
                 GetEndingScene, nil)
 end
 
---function GetIntroScene1() 
---    return Scene(nil,
---                "Our hero starts their story in the small town of Hazelwood.",
---                "What do they have at their side?",
---                Conversion("A weapon", {}, {NewRandomWeapon}),
---                "And so it begins...\nClick on the weapon and move it to your bag on the right.",
---                Conversion("Gold", {}, {NewGoldItem}),
---                "And so it begins...\nClick on the gold and move it to your bag on the right.",
---                GetIntroScene2, nil)
---end
+function GetTestScene() 
+    return Scene(nil,
+                "This is a test scene",
+                "Choose an option please",
+                Conversion("A weapon", {}, {NewRandomWeapon}),
+                "Option 1",
+                Conversion("Gold", {}, {NewGoldItem}),
+                "Option 2",
+                GetDeathScene, nil)
+end
 --
 --function GetIntroScene2()
 --    return Scene(Sprites.CharacterFrameBob,

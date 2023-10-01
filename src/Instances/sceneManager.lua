@@ -82,6 +82,8 @@ SceneManager = Class{
         self.storyText = self.curScene.story
         self.questionText = self.curScene.question
         self.conversionHandler = ConversionHandler(self.pickupManager, self.grid, self.itemStorage, conversion1, conversion2)
+
+        self.curScene.onEntry()
     end,
 
     afterConversion = function(self, id)

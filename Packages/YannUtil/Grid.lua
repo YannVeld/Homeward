@@ -113,6 +113,18 @@ Grid = Class{
         return self._grid[i][j]:isEmpty()
     end,
 
+    hasItems = function(self)
+        for i=1, self.cellsWide do
+            for j=1, self.cellsHigh do
+                local empty = self._grid[i][j]:isEmpty()
+                if not empty then
+                    return true
+                end
+            end
+        end
+        return false 
+    end,
+
     fill = function(self, i, j, content)
         if not self:isGridIndex(i,j) then 
             love.errorhandler("Trying to index non-existing grid cell")

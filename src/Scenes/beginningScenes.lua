@@ -12,7 +12,8 @@ function GetBeginningScene1()
                 "Our story begins in the small town of Hazelwood, where you are busy packing the final things for your journey.\nIt is going to be a long one, so you should be well prepared!",
                 nil,
                 "",
-                GetBeginningScene2, nil)
+                GetBeginningScene2, nil,
+                function() ClearTheBag() end)
 end
 
 function GetBeginningScene2()

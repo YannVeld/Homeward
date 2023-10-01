@@ -26,8 +26,8 @@ function PitfallScene2()
                 "Lose one of your items",
                 Conversion("Any item", AllItemTypes, {}),
                 "That was painful. The pit is too high to climb back up. This cave seems to be the only way.",
-                nil,
-                "",
+                Conversion("Nothing\nto lose", {}, {}, function() return not BagHasItems() end),
+                "You had nothing to lose.",
                 PitfallScene3, nil)
 end
 

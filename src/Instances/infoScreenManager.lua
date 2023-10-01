@@ -38,7 +38,7 @@ InfoScreenManager = Class{
     end,
 
     drawTotalBagValue = function(self)
-        local totalValue = self:getTotalBagValue()
+        local totalValue = GetTotalBagValue()
         love.graphics.setColor(self.textColor)
 
         love.graphics.print("Total value:", self.position.x, self.position.y)
@@ -46,22 +46,4 @@ InfoScreenManager = Class{
         love.graphics.setColor(Colors.white)
     end,
 
-    getTotalBagValue = function(self)
-        local totalValue = 0
-
-        local countedObjs = {}
-
-        for i=1, self.grid.cellsWide do
-            for j=1, self.grid.cellsHigh do
-                local obj = self.grid:getContent(i,j)
-                if obj then
-                    if not Lume.find(countedObjs, obj) then
-                        totalValue = totalValue + obj.value
-                        table.insert(countedObjs, obj)
-                    end
-                end
-            end
-        end
-        return totalValue
-    end,
 }
