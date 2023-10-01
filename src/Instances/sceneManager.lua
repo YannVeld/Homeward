@@ -30,6 +30,10 @@ SceneManager = Class{
         self:setupScene()
     end,
 
+    update = function(self, dt)
+        self:setContinueButtonText()
+    end,
+
     draw = function(self)
 
         if self.curScene.image then
@@ -99,6 +103,9 @@ SceneManager = Class{
     end,
 
     continueToNextScene = function(self, id)
+        if not self.pickupManager:isEmpty() then
+            return
+        end
         if self.itemStorage.item then
             self.itemStorage.item:destroy()
         end
@@ -113,6 +120,21 @@ SceneManager = Class{
         self.continueButton = nil
 
         self:setupScene()
+    end,
+
+    setContinueButtonText = function(self)
+        if not self.continueButton then 
+            return
+        end
+       
+        local str
+        if self.itemStorage:isEmpty() then
+            str = "Continue"
+        else
+            str = "Leave the\n" .. self.itemStorage.item.name
+        end
+        
+        self.continueButton:setText(str, {color=textColor, ha="center", va="top"})
     end,
 
     playerHasType = function(self, itemType)

@@ -6,11 +6,16 @@ ItemStorage = Class{
     init = function(self, pickupManager)
         Instance.init(self)
 
-        self.position = Vector(79, 65)
+        self.baseposition = Vector(79, 65)
+        self.position = self.baseposition
+
+        self.floatFreq = 0.5
+        self.floatIntensity = 5
         self.item = null
     end,
 
     update = function(self, dt)
+        self:makeItemFloat()
         self:emptyStorageWhenItemMoved()
         self:placeItemAtStorage()
     end,
@@ -55,5 +60,11 @@ ItemStorage = Class{
         self.item = item
         self:placeItemAtStorage()
         return true
+    end,
+
+    makeItemFloat = function(self)
+        local time = love.timer.getTime()
+        local offsety = math.cos(2 * math.pi * time * self.floatFreq) * self.floatIntensity
+        self.position = self.baseposition + Vector(0, offsety)
     end,
 }
