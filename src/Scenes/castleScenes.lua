@@ -43,7 +43,7 @@ function GetAbondonnedCastleScene2_outside2()
     return Scene(Sprites.CharacterFrameForest,
                 "The merchant warns you of walking dead in the castle. He advises to scare them with mushrooms.",
                 "Would you like to sell anything?",
-                Conversion("Sell\nany item", AllItemTypes, {NewGoldItem}),
+                Conversion("Sell\nany item", AllItemTypes, {NewRandomGold}),
                 "What a kind person!",
                 Conversion("No", {}, {}),
                 "What a kind person!",

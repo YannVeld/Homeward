@@ -62,7 +62,11 @@ function _afterBanditAttackScene()
 end
 
 function _afterAbondonnedCastleScene()
-    return GetFairyScene1()
+    return GetCityInitialScene()
+end
+
+function _afterCityScene()
+    return GetFairyInitialScene()
 end
 
 function _afterFairyScene()
@@ -70,12 +74,9 @@ function _afterFairyScene()
 end
 
 function _afterHuntersHutScene()
-    return GetCityInitialScene()
-end
-
-function _afterCityScene()
     return GetEndingScene()
 end
+
 
 
 function GetEndingScene()

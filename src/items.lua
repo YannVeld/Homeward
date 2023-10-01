@@ -54,7 +54,7 @@ end
 -- Gold
 
 NewGoldItem = function(position, pickupManager, grid, itemStorage)
-    local name = "Gold"
+    local name = "Gold pouch"
     local value = 5
     local shape = {{0,0}}
     local basecell = 1
@@ -63,6 +63,20 @@ NewGoldItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
+NewBigGoldItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Gold sack"
+    local value = 10
+    local shape = {{0,0}, {0,1}}
+    local basecell = 1
+    local types = {ItemTypes.money}
+    item = Item(name, value, position, Sprites["1x2itemsSack"], Sprites["1x2itemsMoney"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewRandomGold = function(position, pickupManager, grid, itemStorage)
+    local fn = Lume.randomchoice({NewGoldItem, NewBigGoldItem})
+    return fn(position, pickupManager, grid, itemStorage)
+end
 
 
 -- Treasure

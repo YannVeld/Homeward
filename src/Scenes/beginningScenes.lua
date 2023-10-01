@@ -34,7 +34,7 @@ function GetBeginningScene3()
     return Scene(nil,
                 "Some money could also be useful.",
                 "",
-                Conversion("Gold!", {}, {NewGoldItem}),
+                Conversion("Gold!", {}, {NewRandomGold}),
                 "I guess that is it. Let's depart on a journey!",
                 nil,
                 nil,
@@ -55,7 +55,7 @@ function GetBeginningScene4()
 end
 
 NewOldLadyItem = function(position, pickupManager, grid, itemStorage)
-    local fn = Lume.randomchoice({NewRandomWeapon, NewRandomPotion, NewRingItem, NewGoldItem, NewRedGemItem, NewFruitItem})
+    local fn = Lume.randomchoice({NewRandomWeapon, NewRandomPotion, NewRingItem, NewRandomGold, NewRedGemItem, NewFruitItem})
     return fn(position, pickupManager, grid, itemStorage)
 end
 

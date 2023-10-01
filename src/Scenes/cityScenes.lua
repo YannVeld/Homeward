@@ -56,7 +56,7 @@ function GetCityScene_market4()
     return Scene(nil,
                 "\"Are you interested in selling this gem? I will pay you handsomly.\"",
                 "Sell the gem?",
-                Conversion("Yes", {ItemTypes.bigGem}, {NewGoldItem}),
+                Conversion("Yes", {ItemTypes.bigGem}, {NewRandomGold}),
                 "\"Oh, marvellous! Here is one gold pouch.\"",
                 Conversion("No", {}, {}),
                 "The jeweller\'s eyes follow the gem longingly as you walk out of the shop.",
@@ -65,7 +65,7 @@ function GetCityScene_market4()
 end
 
 function _putGoldInStorage()
-    local gold = NewGoldItem(itemStorage.position, pickupManager, myGrid, itemStorage)
+    local gold = NewRandomGold(itemStorage.position, pickupManager, myGrid, itemStorage)
     itemStorage:putInStorage(gold)
 end
 
