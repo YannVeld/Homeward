@@ -13,6 +13,7 @@ SceneManager = Class{
         --self.imagePosition = Vector(10,10)
         self.imagePosition = Vector(12,8)
 
+        self.textColor = Colors.hexToRGB("#4B3D44")
         self.storyTexty = 9
         self.storyTextx_noimage = 13
         self.storyTextx_withImage = 55
@@ -42,10 +43,7 @@ SceneManager = Class{
             love.graphics.draw(self.curScene.image, self.imagePosition:unpack())
         end
 
-        local textColor = Colors.hexToRGB("#4B3D44")
-
-        love.graphics.setColor(textColor)
-
+        love.graphics.setColor(self.textColor)
         local font = love.graphics.getFont()
         local maxwidth = self.storyTextMaxX - self.storyTextPosition.x 
         local width, wrapped = font:getWrap(self.storyText, maxwidth)
@@ -100,7 +98,7 @@ SceneManager = Class{
         self.questionText = ""
 
         self.continueButton = Button(self.continueButtonPos, buttonwidth, buttonheight)
-        self.continueButton:setText("Continue", {color=textColor, ha="center", va="top"})
+        self.continueButton:setText("Continue", {color=self.textColor, ha="center", va="top"})
         self.continueButton:setOnButtonReleased(function() self:continueToNextScene(id) end)
         self.continueButton:setBackgroundSprites(Sprites.ContinueButton, Sprites.ContinueButtonHover, Sprites.ContinueButton, false)
         self.continueButton:setDrawLayer(DrawLayers.Normal)
@@ -138,7 +136,7 @@ SceneManager = Class{
             str = "Leave the\n" .. self.itemStorage.item.name
         end
         
-        self.continueButton:setText(str, {color=textColor, ha="center", va="top"})
+        self.continueButton:setText(str, {color=self.textColor, ha="center", va="top"})
     end,
 
 
