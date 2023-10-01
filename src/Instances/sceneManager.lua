@@ -25,6 +25,9 @@ SceneManager = Class{
         self.questionTextPosition = Vector(13, 75)
         self.questionText = ""
 
+        self.secPerChar = 0.005
+        self:resetCharsShown()
+
         self.continueButtonPos = Vector(79 - Sprites.ContinueButton:getWidth()/2, 95)
         self.continueButton = nil
 
@@ -33,6 +36,7 @@ SceneManager = Class{
     end,
 
     update = function(self, dt)
+        self:incrementCharsShown()
         self:setContinueButtonText()
     end,
 
@@ -45,14 +49,31 @@ SceneManager = Class{
 
         love.graphics.setColor(self.textColor)
         local font = love.graphics.getFont()
-        local maxwidth = self.storyTextMaxX - self.storyTextPosition.x 
-        local width, wrapped = font:getWrap(self.storyText, maxwidth)
+        local maxwidth = self.storyTextMaxX - self.storyTextPosition.x
+        local texttoprint = string.sub(self.storyText,1,self.curCharPos)
+        local width, wrapped = font:getWrap(texttoprint, maxwidth)
         for i,line in ipairs(wrapped) do
             love.graphics.print(line, self.storyTextPosition.x, self.storyTextPosition.y + (i-1) * font:getLineHeight() * font:getHeight())
         end
 
-        love.graphics.print(self.questionText, self.questionTextPosition.x, self.questionTextPosition.y)
+        local questiontexttoprint = string.sub(self.questionText,1,self.curQuestionCharPos)
+        love.graphics.print(questiontexttoprint, self.questionTextPosition.x, self.questionTextPosition.y)
         love.graphics.setColor(Colors.white)
+    end,
+
+    resetCharsShown = function(self)
+        self.curCharPos = 0
+        self.curQuestionCharPos = 0
+        self.startTime = love.timer.getTime()
+    end,
+
+    incrementCharsShown = function(self)
+        self.curCharPos = math.floor( (love.timer.getTime() - self.startTime) / self.secPerChar )
+
+        self.curQuestionCharPos = self.curCharPos - #self.storyText
+        if self.curQuestionCharPos < 0 then
+            self.curQuestionCharPos = 0
+        end
     end,
 
     setupScene = function(self)
@@ -83,11 +104,13 @@ SceneManager = Class{
         self.conversionHandler = ConversionHandler(self.pickupManager, self.grid, self.itemStorage, conversion1, conversion2)
 
         self.curScene.onEntry()
+        self:resetCharsShown()
     end,
 
     afterConversion = function(self, id)
         local buttonwidth = Sprites.ContinueButton:getWidth()
         local buttonheight = Sprites.ContinueButton:getHeight()
+        self:resetCharsShown()
 
         if id == 1 then
             self.storyText = self.curScene.afterstory1
