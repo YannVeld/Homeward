@@ -36,14 +36,14 @@ function _afterAbondonnedCastleScene()
 end
 
 function GetDeathScene()
-    return Scene(nil,
+    return Scene(Sprites.CharacterFrameDeath,
+                "You have perished.\nWould you like to retry from the beginning?",
                 "",
-                "",
+                Conversion("Yes", {}, {}),
+                "You can learn from each death.\nGood luck!",
                 nil,
-                "You died",
                 nil,
-                nil,
-                GetEndingScene, nil)
+                GetInitialScene, nil)
 end
 
 function GetTestScene() 

@@ -112,7 +112,15 @@ NewRandomGem = function(position, pickupManager, grid, itemStorage)
     return fn(position, pickupManager, grid, itemStorage)
 end
 
-
+NewBoneItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Bone"
+    local value = 5
+    local shape = {{0,0}, {1,0}}
+    local basecell = 1
+    local types = {ItemTypes.treasure}
+    item = Item(name, value, position, Sprites["2x1itemsBone"], Sprites["2x1itemsTreasure"], Sprites["2x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
 
 
 -- Food
