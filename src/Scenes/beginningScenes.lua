@@ -25,7 +25,7 @@ function GetBeginningScene2()
                 Conversion("Sword", {}, {NewSwordItem}),
                 "A sword it is!\nClick and drag the sword to your backpack on the right.",
                 Conversion("Knife", {}, {NewKnifeItem}),
-                "A dagger it is!\nClick and drag the dagger to your backpack on the right.",
+                "A knife it is!\nClick and drag the knife to your backpack on the right.",
                 GetBeginningScene3, nil)
 end
 
@@ -52,7 +52,7 @@ function GetBeginningScene4()
 end
 
 NewOldLadyItem = function(position, pickupManager, grid, itemStorage)
-    local fn = Lume.randomchoice({NewSwordItem, NewPotionItem, NewRingItem, NewGoldItem})
+    local fn = Lume.randomchoice({NewSwordItem, NewRandomPotion, NewRingItem, NewGoldItem, NewRedGemItem})
     return fn(position, pickupManager, grid, itemStorage)
 end
 

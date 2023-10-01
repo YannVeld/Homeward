@@ -44,10 +44,10 @@ end
 function PitfallScene4()
     return Scene(Sprites.CharacterFrameCave,
                 "After walking for a bit more you enter a beautiful carved room, with a huge gem on a pedestal in the middle of it.",
-                "Take the gem?",
-                Conversion("Yes!", {}, {NewHugeGemItem}),
+                "",
+                Conversion("Take it", {}, {NewGreenGemItem}),
                 "It' so pretty!",
-                Conversion("No", {}, {}),
+                Conversion("Leave it", {}, {}),
                 "That seems risky. Let's not.",
                 ExitPitfallScene, nil)
 end

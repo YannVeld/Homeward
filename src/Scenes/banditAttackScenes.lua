@@ -4,7 +4,7 @@ function GetBanditAttackInitialScene()
 end
 
 function _afterBanditAttackScene()
-    return GetIntroScene1()
+    return GetEndingScene()
 end
 
 function GetBanditAttackScene1()
