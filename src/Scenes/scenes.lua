@@ -4,7 +4,7 @@ require("src.itemTypes")
 require("src.items")
 
 function GetInitialScene()
-    return GetIntroScene1()
+    return GetBeginningScene1()
 end
 
 function GetIntroScene1() 

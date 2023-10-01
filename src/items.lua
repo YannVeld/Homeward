@@ -69,7 +69,7 @@ end
 -- Food
 
 NewWeirdMushroomItem = function(position, pickupManager, grid, itemStorage)
-    local name = "Edible(?) Mushroom"
+    local name = "Mushroom"
     local shape = {{0,0}}
     local basecell = 1
     local types = {ItemTypes.food}
@@ -79,6 +79,24 @@ end
 
 NewCakeItem = function(position, pickupManager, grid, itemStorage)
     local name = "A cake"
+    local shape = {{0,0}, {1,0}}
+    local basecell = 1
+    local types = {ItemTypes.food}
+    item = Item(name, position, Sprites["2x1itemsCake"], Sprites["2x1itemsFood"], Sprites["2x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewBreadItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Bread"
+    local shape = {{0,0}, {1,0}}
+    local basecell = 1
+    local types = {ItemTypes.food}
+    item = Item(name, position, Sprites["2x1itemsCake"], Sprites["2x1itemsFood"], Sprites["2x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewPotionItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Potion"
     local shape = {{0,0}, {1,0}}
     local basecell = 1
     local types = {ItemTypes.food}

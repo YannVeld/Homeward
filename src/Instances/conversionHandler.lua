@@ -43,6 +43,10 @@ ConversionHandler = Class{
             OptionButton2:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
             OptionButton2:setDrawLayer(DrawLayers.Normal)
         end
+
+        if (not self.conversion1) and (not self.conversion2) then
+            self:didConversion(1)
+        end
     end,
 
     performConversion = function(self, conversion, id)

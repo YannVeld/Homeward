@@ -79,9 +79,9 @@ SceneManager = Class{
             conversion2 = nil
         end
 
-        self.conversionHandler = ConversionHandler(self.pickupManager, self.grid, self.itemStorage, conversion1, conversion2)
         self.storyText = self.curScene.story
         self.questionText = self.curScene.question
+        self.conversionHandler = ConversionHandler(self.pickupManager, self.grid, self.itemStorage, conversion1, conversion2)
     end,
 
     afterConversion = function(self, id)
@@ -93,6 +93,7 @@ SceneManager = Class{
         else
             self.storyText = self.curScene.afterstory2
         end
+
         self.questionText = ""
 
         self.continueButton = Button(self.continueButtonPos, buttonwidth, buttonheight)

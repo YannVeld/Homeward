@@ -59,7 +59,7 @@ function SetupScreen()
 end
 
 function SetupGameFont()
-    Fonts.m3x6:setLineHeight(0.6)
+    Fonts.m3x6:setLineHeight(0.7)
     love.graphics.setFont(Fonts.m3x6)
 end
 
