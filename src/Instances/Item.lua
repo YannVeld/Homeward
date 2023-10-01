@@ -4,8 +4,9 @@ require("src.itemTypes")
 Item = Class{
     __includes = {Pickupable},
 
-    init = function(self, name, position, sprite, backgroundsprite, highlightsprite, shape, basecell, types, pickupManager, itemGrid, itemStorage)
+    init = function(self, name, value, position, sprite, backgroundsprite, highlightsprite, shape, basecell, types, pickupManager, itemGrid, itemStorage)
         self.name = name
+        self.value = value
         self.itemsprite = sprite
         self.backgroundsprite = backgroundsprite
         self.highlightsprite = highlightsprite

@@ -2,33 +2,66 @@
 InfoScreenManager = Class{
     __includes = {Instance},
 
-    init = function(self, pickupManager)
+    init = function(self, pickupManager, grid)
         Instance.init(self)
 
-        self.position = Vector(169, 95)
+        self.position = Vector(172, 96)
+        self.valueOffset = 5
         self.pickupManager = pickupManager
-        self.text = love.graphics.newText(love.graphics:getFont(), "")
+        self.grid = grid
+        self.textColor = Colors.hexToRGB("#4B3D44")
     end,
 
     draw = function(self)
-        local textColor = Colors.hexToRGB("#4B3D44")
+        self:drawItemInfo()
+    end,
 
+    drawItemInfo = function(self)
         local item = self.pickupManager.pickedupItem
         if not item then
             item = self.pickupManager.pickupableUnderneathMouse
             if not item then
-                return
+                return self:drawTotalBagValue()
             end
             if not item.itemsprite then
-                return
+                return self:drawTotalBagValue()
             end
         end
-        --self.text:set(item.name .. " (" .. item.types[1] .. ")")
-        self.text:set(item.name)
+       
+        local typeCol = ItemTypeToColor(item.types[1])
 
-        love.graphics.setColor(textColor)
-        love.graphics.draw(self.text, self.position.x, self.position.y)
-        --love.graphics.print(item.name, self.position.x, self.position.y)
+        love.graphics.setColor(typeCol)
+        love.graphics.print(item.name, self.position.x, self.position.y)
+        love.graphics.setColor(self.textColor)
+        love.graphics.print("Value: "..item.value, self.position.x, self.position.y + love.graphics.getFont():getLineHeight() * love.graphics.getFont():getHeight())
         love.graphics.setColor(Colors.white)
+    end,
+
+    drawTotalBagValue = function(self)
+        local totalValue = self:getTotalBagValue()
+        love.graphics.setColor(self.textColor)
+
+        love.graphics.print("Total value:", self.position.x, self.position.y)
+        love.graphics.print(totalValue, self.position.x + self.valueOffset, self.position.y + love.graphics.getFont():getLineHeight() * love.graphics.getFont():getHeight())
+        love.graphics.setColor(Colors.white)
+    end,
+
+    getTotalBagValue = function(self)
+        local totalValue = 0
+
+        local countedObjs = {}
+
+        for i=1, self.grid.cellsWide do
+            for j=1, self.grid.cellsHigh do
+                local obj = self.grid:getContent(i,j)
+                if obj then
+                    if not Lume.find(countedObjs, obj) then
+                        totalValue = totalValue + obj.value
+                        table.insert(countedObjs, obj)
+                    end
+                end
+            end
+        end
+        return totalValue
     end,
 }

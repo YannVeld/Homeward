@@ -21,7 +21,7 @@ function gamestates.thegame:enter()
     myGrid = Grid(pos, width, height, cellWidth, cellHeight)
     
     pickupManager = ItemPickupManager()
-    infoScreenManager = InfoScreenManager(pickupManager)
+    infoScreenManager = InfoScreenManager(pickupManager, myGrid)
     itemStorage = ItemStorage()
 
     local initialScene = GetInitialScene()
