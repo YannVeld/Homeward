@@ -135,7 +135,7 @@ SceneManager = Class{
     end,
 
     showFullTextOnClick = function(self)
-        if (not love.keyboard.isDown("space")) and (not love.keyboard.isDown("return")) then
+        if (not love.keyboard.isDown("space")) and (not love.keyboard.isDown("return")) and (not love.mouse.isDown(1)) then
             return
         end
 
