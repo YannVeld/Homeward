@@ -102,7 +102,7 @@ NewGreenGemItem = function(position, pickupManager, grid, itemStorage)
     local value = 60
     local shape = {{0,0}, {0,1}, {1,0}, {1,1}}
     local basecell = 1
-    local types = {ItemTypes.treasure, ItemTypes.gem}
+    local types = {ItemTypes.treasure, ItemTypes.gem, ItemTypes.bigGem}
     item = Item(name, value, position, Sprites["2x2itemsGemGreen"], Sprites["2x2itemsTreasure"], Sprites["2x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end

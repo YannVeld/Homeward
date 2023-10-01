@@ -21,7 +21,7 @@ function GetHuntersHutScene2()
                 "",
                 Conversion("Uh...", {}, {}),
                 "\"Get out then!\"",
-                Conversion("Give a bone to his hound", {ItemTypes.bone}, {NewMeatItem}, function() return BagHasType(ItemTypes.bone) end),
+                Conversion("Bone for the hound", {ItemTypes.bone}, {NewMeatItem}, function() return BagHasType(ItemTypes.bone) end),
                 "The hound happily accepts the bone and starts chewing on it.\n\"Uhm, thanks, I guess. Here have this. It's freshly caught.\"",
                 _afterHuntersHutScene, nil)
 end

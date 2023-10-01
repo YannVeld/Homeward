@@ -52,9 +52,12 @@ function _afterFairyScene()
 end
 
 function _afterHuntersHutScene()
-    return GetEndingScene()
+    return GetCityInitialScene()
 end
 
+function _afterCityScene()
+    return GetEndingScene()
+end
 
 
 function GetEndingScene()
