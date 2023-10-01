@@ -12,8 +12,8 @@ NewSwordItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
-NewKnifeItem = function(position, pickupManager, grid, itemStorage)
-    local name = "Knife"
+NewSmallKnifeItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Small knife"
     local shape = {{0,0}}
     local basecell = 1
     local types = {ItemTypes.weapon}
@@ -21,8 +21,26 @@ NewKnifeItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
+NewKnifeItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Knife"
+    local shape = {{0,0}, {0,1}}
+    local basecell = 1
+    local types = {ItemTypes.weapon}
+    item = Item(name, position, Sprites["1x2itemsKnife"], Sprites["1x2itemsWeapons"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewShieldItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Shield"
+    local shape = {{0,0},{0,1},{1,0},{1,1}}
+    local basecell = 1
+    local types = {ItemTypes.weapon}
+    item = Item(name, position, Sprites["2x2itemsShield"], Sprites["2x2itemsWeapons"], Sprites["2x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
 NewRandomWeapon = function(position, pickupManager, grid, itemStorage)
-    local fn = Lume.randomchoice({NewSwordItem, NewKnifeItem})
+    local fn = Lume.randomchoice({NewSwordItem, NewKnifeItem, NewShieldItem, NewSmallKnifeItem})
     return fn(position, pickupManager, grid, itemStorage)
 end
 
@@ -36,7 +54,7 @@ NewGoldItem = function(position, pickupManager, grid, itemStorage)
     local shape = {{0,0}}
     local basecell = 1
     local types = {ItemTypes.money}
-    item = Item(name, position, Sprites["1x1itemsGold"], Sprites["1x1itemsMoney"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    item = Item(name, position, Sprites["1x1itemsPouch"], Sprites["1x1itemsMoney"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
 
@@ -53,6 +71,14 @@ NewRingItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
+NewNecklaceItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Necklace"
+    local shape = {{0,0}, {0,1}}
+    local basecell = 1
+    local types = {ItemTypes.treasure}
+    item = Item(name, position, Sprites["1x2itemsNecklace"], Sprites["1x2itemsTreasure"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
 
 NewRedGemItem = function(position, pickupManager, grid, itemStorage)
     local name = "Red Gem"
@@ -82,12 +108,35 @@ end
 
 -- Food
 
-NewWeirdMushroomItem = function(position, pickupManager, grid, itemStorage)
+NewSmallMushroomItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Mushroom"
+    local shape = {{0,0}}
+    local basecell = 1
+    local types = {ItemTypes.food, ItemTypes.mushroom}
+    item = Item(name, position, Sprites["1x1itemsMushroom"], Sprites["1x1itemsFood"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewMushroomItem = function(position, pickupManager, grid, itemStorage)
     local name = "Mushroom"
     local shape = {{0,0}, {0,1}}
     local basecell = 1
-    local types = {ItemTypes.food}
+    local types = {ItemTypes.food, ItemTypes.mushroom}
     item = Item(name, position, Sprites["1x2itemsMushroom"], Sprites["1x2itemsFood"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
+
+NewRandomMushroomItem = function(position, pickupManager, grid, itemStorage)
+    local fn = Lume.randomchoice({NewMushroomItem, NewMushroomItem, NewSmallMushroomItem})
+    return fn(position, pickupManager, grid, itemStorage)
+end
+
+NewFruitItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Fruit"
+    local shape = {{0,0}}
+    local basecell = 1
+    local types = {ItemTypes.food}
+    item = Item(name, position, Sprites["1x1itemsFruit"], Sprites["1x1itemsFood"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
 

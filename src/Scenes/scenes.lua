@@ -7,6 +7,44 @@ function GetInitialScene()
     return GetBeginningScene1()
 end
 
+function _afterBeginningScene()
+    return GetFlowerScene()
+end
+
+function GetFlowerScene()
+    return Scene(Sprites.CharacterFrameForest,
+                "You find an interesting mushroom in the ground next to a big tree. Perhaps it is edible.",
+                "Pick it?",
+                Conversion("Yes", {}, {NewRandomMushroomItem}),
+                "Might come in useful.",
+                Conversion("No", {}, {}),
+                "Probably a wise idea.",
+                GetPitfallInitialScene, nil)
+end
+
+function _afterPitfallScene()
+    return GetBanditAttackInitialScene()
+end
+
+function _afterBanditAttackScene()
+    return GetAbondonnedCastleInitialScene()
+end
+
+function _afterAbondonnedCastleScene()
+    return GetEndingScene()
+end
+
+function GetDeathScene()
+    return Scene(nil,
+                "",
+                "",
+                nil,
+                "You died",
+                nil,
+                nil,
+                GetEndingScene, nil)
+end
+
 --function GetIntroScene1() 
 --    return Scene(nil,
 --                "Our hero starts their story in the small town of Hazelwood.",
@@ -28,18 +66,6 @@ end
 --                nil,
 --                GetFlowerScene, nil)
 --end
-
-
-function GetFlowerScene()
-    return Scene(Sprites.CharacterFrameForest,
-                "You find an interesting mushroom in the ground next to a big tree. Perhaps it is edible.",
-                "Pick it?",
-                Conversion("Yes", {}, {NewWeirdMushroomItem}),
-                "Might come in useful.",
-                Conversion("No", {}, {}),
-                "Probably a wise idea.",
-                GetPitfallInitialScene, nil)
-end
 
 
 function GetEndingScene()

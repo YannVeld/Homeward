@@ -3,9 +3,6 @@ function GetBanditAttackInitialScene()
     return GetBanditAttackScene1()
 end
 
-function _afterBanditAttackScene()
-    return GetEndingScene()
-end
 
 function GetBanditAttackScene1()
     return Scene(Sprites.CharacterFrameForest,

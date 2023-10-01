@@ -3,9 +3,6 @@ function GetBeginningInitialScene()
     return GetBeginningScene1()
 end
 
-function _afterBeginningScene()
-    return GetFlowerScene()
-end
 
 function GetBeginningScene1()
     return Scene(nil,

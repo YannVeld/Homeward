@@ -5,7 +5,7 @@ InfoScreenManager = Class{
     init = function(self, pickupManager)
         Instance.init(self)
 
-        self.position = Vector(169, 99)
+        self.position = Vector(169, 95)
         self.pickupManager = pickupManager
         self.text = love.graphics.newText(love.graphics:getFont(), "")
     end,
@@ -23,7 +23,8 @@ InfoScreenManager = Class{
                 return
             end
         end
-        self.text:set(item.name .. " (" .. item.types[1] .. ")")
+        --self.text:set(item.name .. " (" .. item.types[1] .. ")")
+        self.text:set(item.name)
 
         love.graphics.setColor(textColor)
         love.graphics.draw(self.text, self.position.x, self.position.y)
