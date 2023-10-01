@@ -55,10 +55,17 @@ SceneManager = Class{
         love.graphics.setColor(self.textColor)
         local font = love.graphics.getFont()
         local maxwidth = self.storyTextMaxX - self.storyTextPosition.x
-        local texttoprint = string.sub(self.storyText,1,self.curCharPos)
-        local width, wrapped = font:getWrap(texttoprint, maxwidth)
+        local width, wrapped = font:getWrap(self.storyText, maxwidth)
+
+        local printedstrlen = 0
         for i,line in ipairs(wrapped) do
-            love.graphics.print(line, self.storyTextPosition.x, self.storyTextPosition.y + (i-1) * font:getLineHeight() * font:getHeight())
+
+            local pos = self.curCharPos - printedstrlen
+            if pos < 0 then pos = 0 end
+            local toprint = string.sub(line, 1, pos)
+            printedstrlen = printedstrlen + #toprint
+
+            love.graphics.print(toprint, self.storyTextPosition.x, self.storyTextPosition.y + (i-1) * font:getLineHeight() * font:getHeight())
         end
 
         local questiontexttoprint = string.sub(self.questionText,1,self.curQuestionCharPos)
