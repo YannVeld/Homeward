@@ -30,7 +30,6 @@ Item = Class{
     end,
 
     update = function(self, dt)
-        self:whenDroppingOutsideGrid()
         self:putInStorageWhenDroppedOutsideGrid()
         if self:isPickedUp() then
             self:moveWithMouse()
@@ -216,22 +215,6 @@ Item = Class{
         return times > 0
     end,
 
-    whenDroppingOutsideGrid = function(self)
-        if self.itemStorage:isEmpty() then
-            self.canBeDropped = true
-            return
-        end
-
-        local mousex, mousey = Push:toGame(love.mouse.getPosition())
-        local i,j = self.itemGrid:getGridIndex(mousex, mousey)
-        local mouseIsOnGrid = self.itemGrid:isGridIndex(i,j)
-
-        self.canBeDropped = true
-        if not mouseIsOnGrid then
-            self.canBeDropped = false
-        end
-    end,
-
     putInStorageWhenDroppedOutsideGrid = function(self)
         if self:isOnGrid() then
             return
@@ -245,7 +228,20 @@ Item = Class{
         local succes = self.itemStorage:putInStorage(self)
 
         if not succes then
-            print("WARNING: item outside grid and storage!")
+            self:swapItemInPickupAndStorage()
+        end
+    end,
+
+    swapItemInPickupAndStorage = function(self)
+        local itemOnFloor = self
+        local itemInStorage = self.itemStorage.item
+
+        self.itemStorage:emptyStorage()
+        self.itemStorage:putInStorage(self)
+        local succes = self.pickupManager:pickupItem(itemInStorage)
+
+        if not succes then
+            print("WARNING: something went wrong with swapping storage and hand!")
         end
     end,
 }
