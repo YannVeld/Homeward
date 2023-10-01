@@ -12,7 +12,8 @@ function GetBanditAttackScene1()
                 "Duty calls",
                 Conversion("No", {}, {}),
                 "Better be safe than sorry.",
-                GetBanditAttackScene2, _afterBanditAttackScene)
+                GetBanditAttackScene2, _afterBanditAttackScene,
+                nil, nil)
 end
 
 function GetBanditAttackScene2()
@@ -24,7 +25,8 @@ function GetBanditAttackScene2()
                 Conversion("Bare handed", {}, {}),
                 "That did not go so well ...",
                 GetBanditAttackScene3_win,
-                GetBanditAttackScene3_loss)
+                GetBanditAttackScene3_loss,
+                gainItemSound, nil)
 end
 
 function GetBanditAttackScene3_win()
@@ -35,7 +37,8 @@ function GetBanditAttackScene3_win()
                 "You both go your own ways.",
                 Conversion("Don't take item", {}, {}),
                 nil,
-                _afterBanditAttackScene, nil)
+                _afterBanditAttackScene, nil,
+                gainItemSound, nil)
 end
 
 function GetBanditAttackScene3_loss()
@@ -46,5 +49,6 @@ function GetBanditAttackScene3_loss()
                 "That was scary.",
                 Conversion("Nothing", {}, {}, function() return not BagHasType(ItemTypes.money) end),
                 "You had nothing of interest to give them.",
-                _afterBanditAttackScene, nil)
+                _afterBanditAttackScene, nil,
+                nil, nil)
 end

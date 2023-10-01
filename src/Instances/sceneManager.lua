@@ -27,10 +27,13 @@ SceneManager = Class{
 
         self.secPerChar = 0.01
         self.showAllChars = false
+        self.charsPerTypeSound = 3
+        self:setupTypeSounds()
         self:resetCharsShown()
 
         self.continueButtonPos = Vector(79 - Sprites.ContinueButton:getWidth()/2, 95)
         self.continueButton = nil
+        self:setupButtonSounds()
 
         Signal.register('conversionsDone', function(id) self:afterConversion(id) end)
         self:setupScene()
@@ -63,10 +66,51 @@ SceneManager = Class{
         love.graphics.setColor(Colors.white)
     end,
 
+    setupButtonSounds = function(self)
+        --self.clickSound = love.audio.newSource("Sounds/clickButton.wav", "static")
+        self.clickSound = love.audio.newSource("Sounds/blibSound.wav", "static")
+        self.clickSound:setVolume(SoundsVolume)
+
+        self.noClickSound = love.audio.newSource("Sounds/noClickButton.wav", "static")
+        self.noClickSound:setVolume(SoundsVolume)
+    end,
+
+    setupTypeSounds = function(self)
+        self.typeSounds = {}
+        self.typeSounds[1] = love.audio.newSource("Sounds/typesound1.wav", "static")
+        self.typeSounds[2] = love.audio.newSource("Sounds/typesound2.wav", "static")
+        self.typeSounds[3] = love.audio.newSource("Sounds/typesound3.wav", "static")
+
+        for i,sound in ipairs(self.typeSounds) do
+            sound:setVolume(SoundsVolume)
+        end
+    end,
+
+    playTypeSound = function(self)
+        if self.curCharPos > #self.storyText + #self.questionText then
+            return
+        end
+
+        self.typeSound:setPitch(love.math.random(0.8, 1.2))
+        self.typeSound:play()
+    end,
+
+    playClickSound = function(self)
+        self.clickSound:setPitch(love.math.random(0.9, 1.1))
+        self.clickSound:play()
+    end,
+
+    playNoClickSound = function(self)
+        self.noClickSound:setPitch(love.math.random(0.9, 1.1))
+        self.noClickSound:play()
+    end,
+
     resetCharsShown = function(self)
         self.curCharPos = 0
         self.curQuestionCharPos = 0
         self.showAllChars = false
+        self.nextCharNumForSound = 0
+        self.typeSound = Lume.randomchoice(self.typeSounds)
         self.startTime = love.timer.getTime()
     end,
 
@@ -78,6 +122,11 @@ SceneManager = Class{
         end
 
         self.curCharPos = math.floor( (love.timer.getTime() - self.startTime) / self.secPerChar )
+
+        if self.curCharPos > self.nextCharNumForSound then
+            self.nextCharNumForSound = self.curCharPos + self.charsPerTypeSound
+            self:playTypeSound()
+        end
 
         self.curQuestionCharPos = self.curCharPos - #self.storyText
         if self.curQuestionCharPos < 0 then
@@ -120,6 +169,11 @@ SceneManager = Class{
         self.questionText = self.curScene.question
         self.conversionHandler = ConversionHandler(self.pickupManager, self.grid, self.itemStorage, conversion1, conversion2)
 
+
+        if self.curScene.entrySound then
+            self.curScene.entrySound:play()
+        end
+
         self.curScene.onEntry()
         self:resetCharsShown()
     end,
@@ -131,9 +185,16 @@ SceneManager = Class{
 
         if id == 1 then
             self.storyText = self.curScene.afterstory1
+            if self.curScene.sound1 then
+                self.curScene.sound1:play()
+            end
         else
             self.storyText = self.curScene.afterstory2
+            if self.curScene.sound2 then
+                self.curScene.sound2:play()
+            end
         end
+
 
         self.questionText = ""
 
@@ -146,6 +207,7 @@ SceneManager = Class{
 
     continueToNextScene = function(self, id)
         if not self.pickupManager:isEmpty() then
+            self:playNoClickSound()
             return
         end
         if self.itemStorage.item then
@@ -161,6 +223,7 @@ SceneManager = Class{
         self.continueButton:destroy()
         self.continueButton = nil
 
+        self:playClickSound()
         self:setupScene()
     end,
 

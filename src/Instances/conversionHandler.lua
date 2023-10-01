@@ -12,7 +12,27 @@ ConversionHandler = Class{
         self.conversion1 = conversion1
         self.conversion2 = conversion2
 
+        self:setupButtonSounds()
         self:createOptionButtons()
+    end,
+
+    setupButtonSounds = function(self)
+        --self.clickSound = love.audio.newSource("Sounds/clickButton.wav", "static")
+        self.clickSound = love.audio.newSource("Sounds/blibSound.wav", "static")
+        self.clickSound:setVolume(SoundsVolume)
+
+        self.noClickSound = love.audio.newSource("Sounds/noClickButton.wav", "static")
+        self.noClickSound:setVolume(SoundsVolume)
+    end,
+
+    playClickSound = function(self)
+        self.clickSound:setPitch(love.math.random(0.9, 1.1))
+        self.clickSound:play()
+    end,
+
+    playNoClickSound = function(self)
+        self.noClickSound:setPitch(love.math.random(0.9, 1.1))
+        self.noClickSound:play()
     end,
 
     createOptionButtons = function(self)
@@ -58,11 +78,13 @@ ConversionHandler = Class{
 
     performConversion = function(self, conversion, id)
         if not self.itemStorage:isEmpty() then
+            self:playNoClickSound()
             return false
         end
         
         if #conversion.inTypes == 0 then
             if not self.pickupManager:isEmpty() then
+                self:playNoClickSound()
                 return false
             end
 
@@ -70,10 +92,12 @@ ConversionHandler = Class{
                 local item = fn(self.itemStorage.position, self.pickupManager, self.grid, self.itemStorage)
             end
             self:didConversion(id)
+            self:playClickSound()
             return true
         end
         
         if self.pickupManager:isEmpty() then
+            self:playNoClickSound()
             return false
         end
 
@@ -86,8 +110,10 @@ ConversionHandler = Class{
                 self.itemStorage:putInStorage(item)
             end
             self:didConversion(id)
+            self:playClickSound()
             return true
         end
+        self:playNoClickSound()
         return false
     end,
 

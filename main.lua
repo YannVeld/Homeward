@@ -9,6 +9,9 @@ local initialGameState = gamestates.thegame
 local gameWidth, gameHeight = 240, 135 --1280, 720
 local windowToGameScale = 4
 
+local musicVolume = 0.5
+local soundsVolume = 0.5
+
 function love.load()
     SetupRandomSeed()
     SetupScreen()
@@ -16,6 +19,8 @@ function love.load()
     SetupGameFont()
     input = GetInputs()
     camera = Camera()
+    SetupGameMusic()
+    SoundsVolume = soundsVolume
     InitializeGameState()
 end
 
@@ -62,6 +67,14 @@ function SetupGameFont()
     Fonts.m3x6:setLineHeight(0.7)
     love.graphics.setFont(Fonts.m3x6)
 end
+
+function SetupGameMusic()
+    MusicSource = love.audio.newSource("Music/LD54Song.mp3", "stream")
+    MusicSource:setLooping(true)
+    MusicSource:setVolume(musicVolume)
+    MusicSource:play()
+end
+
 
 function InitializeGameState()
     Gamestate.registerEvents()

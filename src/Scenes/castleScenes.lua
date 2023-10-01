@@ -11,7 +11,8 @@ function GetAbondonnedCastleScene1()
                 "What if it will rain?",
                 Conversion("Outside", {}, {}),
                 "Who knows what is in there.",
-                GetAbondonnedCastleScene2_inside, GetAbondonnedCastleScene2_outside1)
+                GetAbondonnedCastleScene2_inside, GetAbondonnedCastleScene2_outside1,
+                nil, nil)
 end
 
 function GetAbondonnedCastleScene2_inside()
@@ -22,7 +23,8 @@ function GetAbondonnedCastleScene2_inside()
                 "This could come in handy.",
                 Conversion("No", {}, {}),
                 "I have plenty of weapons already.",
-                GetAbondonnedCastleScene3, nil)
+                GetAbondonnedCastleScene3, nil,
+                gainItemSound, nil)
 end
 
 function GetAbondonnedCastleScene2_outside1()
@@ -33,7 +35,8 @@ function GetAbondonnedCastleScene2_outside1()
                 "At the campfire is an young travelling merchant.\n\"Good evening, please join my fire if you wish.\"",
                 Conversion("No", {}, {}),
                 "Let's not bother them.",
-                GetAbondonnedCastleScene2_outside2, GetAbondonnedCastleScene3)
+                GetAbondonnedCastleScene2_outside2, GetAbondonnedCastleScene3,
+                nil, nil)
 end
 
 function GetAbondonnedCastleScene2_outside2()
@@ -44,7 +47,8 @@ function GetAbondonnedCastleScene2_outside2()
                 "What a kind person!",
                 Conversion("No", {}, {}),
                 "What a kind person!",
-                GetAbondonnedCastleScene3, nil)
+                GetAbondonnedCastleScene3, nil,
+                gainItemSound, nil)
 end
 
 function GetAbondonnedCastleScene3()
@@ -55,7 +59,8 @@ function GetAbondonnedCastleScene3()
                 "Phew, that was close.",
                 Conversion("Surrender", {}, {}),
                 "I hope skeletons have mercy...",
-                GetAbondonnedCastleScene4, GetDeathScene)
+                GetAbondonnedCastleScene4, GetDeathScene,
+                gainItemSound, nil)
 end
 
 function GetAbondonnedCastleScene4()
@@ -66,5 +71,6 @@ function GetAbondonnedCastleScene4()
                 "You happily leave the castle behind you.",
                 nil,
                 "",
-                _afterAbondonnedCastleScene, nil)
+                _afterAbondonnedCastleScene, nil,
+                nil, nil)
 end

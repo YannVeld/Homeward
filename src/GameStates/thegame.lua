@@ -12,6 +12,7 @@ gamestates.thegame = {}
 
 function gamestates.thegame:enter()
     InstanceManager.removeAll()
+    SetupSceneSounds()
 
     local pos = Vector(166,19)
     local width = 4
@@ -26,6 +27,7 @@ function gamestates.thegame:enter()
 
     local initialScene = GetInitialScene()
     sceneManager = SceneManager(initialScene, pickupManager, myGrid, itemStorage)
+
 
     --local conversion1 = GainGoldConversion()
     --local conversion2 = GainSwordConversion()

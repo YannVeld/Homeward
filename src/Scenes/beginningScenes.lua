@@ -13,6 +13,8 @@ function GetBeginningScene1()
                 nil,
                 "",
                 GetBeginningScene2, nil,
+                nil, nil,
+                nil,
                 function() ClearTheBag() end)
 end
 
@@ -24,7 +26,8 @@ function GetBeginningScene2()
                 "A sword it is!\nClick and drag the sword to your backpack on the right.",
                 Conversion("Knife", {}, {NewKnifeItem}),
                 "A knife it is!\nClick and drag the knife to your backpack on the right.",
-                GetBeginningScene3, nil)
+                GetBeginningScene3, nil,
+                gainItemSound, gainItemSound)
 end
 
 function GetBeginningScene3()
@@ -35,7 +38,8 @@ function GetBeginningScene3()
                 "I guess that is it. Let's depart on a journey!",
                 nil,
                 nil,
-                GetBeginningScene4, nil)
+                GetBeginningScene4, nil,
+                gainItemSound, nil)
 end
 
 function GetBeginningScene4()
@@ -46,7 +50,8 @@ function GetBeginningScene4()
                 "Delicious!",
                 Conversion("Don't buy\nbread", {}, {}),
                 "Better save the money.",
-                GetBeginningScene5, nil)
+                GetBeginningScene5, nil,
+                gainItemSound, nil)
 end
 
 NewOldLadyItem = function(position, pickupManager, grid, itemStorage)
@@ -62,7 +67,8 @@ function GetBeginningScene5()
                 "That was weird, but thanks I guess?",
                 Conversion("No", {}, {}),
                 "She walks off annoyed mumbling to herself.",
-                GetBeginningScene6, nil)
+                GetBeginningScene6, nil,
+                gainItemSound, nil)
 end
 
 function GetBeginningScene6()
@@ -73,5 +79,6 @@ function GetBeginningScene6()
                 "At long last you can begin your journey! You set off into the forest.",
                 nil,
                 "",
-                _afterBeginningScene, nil)
+                _afterBeginningScene, nil,
+                nil, nil)
 end

@@ -12,7 +12,8 @@ function GetFairyScene1()
                 "Your mind clears and you stay well clear of the mysterious mind-bending music.",
                 Conversion("No", {}, {}),
                 "You find yourself walking to a clearing. There, a small fairy stops singing to turn and look at you.\n\"Hihi, hello!\"",
-                _afterFairyScene, GetFairyScene2)
+                _afterFairyScene, GetFairyScene2,
+                nil, nil)
 end
 
 function GetFairyScene2()
@@ -23,7 +24,8 @@ function GetFairyScene2()
                 "\"Oh, so pretty! I will keep it, hihi. You can have this!\"\nshe says, before disappearing into the forest.",
                 Conversion("No", {}, {}),
                 "You see the fairy starting to cry. You feel your mind getting fuzzy. Was this a mistake?",
-                _afterFairyScene, GetFairyScene3)
+                _afterFairyScene, GetFairyScene3,
+                gainItemSound, nil)
 end
 
 function _giveRandomItemToFairy()
@@ -45,5 +47,7 @@ function GetFairyScene3()
                 nil,
                 nil,
                 _afterFairyScene, nil,
+                nil, nil, 
+                loseSound,
                 function() _giveRandomItemToFairy() end)
 end

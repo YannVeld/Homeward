@@ -3,6 +3,20 @@ require("src.conversion")
 require("src.itemTypes")
 require("src.items")
 
+function SetupSceneSounds()
+    gainItemSound = love.audio.newSource("Sounds/gain1.wav", "static")
+    gainItemSound:setVolume(SoundsVolume)
+    
+    superGainItemSound = love.audio.newSource("Sounds/supergain.wav", "static")
+    superGainItemSound:setVolume(SoundsVolume)
+    
+    winSound = love.audio.newSource("Sounds/Win.wav", "static")
+    winSound:setVolume(SoundsVolume)
+    
+    loseSound = love.audio.newSource("Sounds/Loss.wav", "static")
+    loseSound:setVolume(SoundsVolume)
+end
+
 function GetInitialScene()
     return GetBeginningScene1()
     --return GetTestScene()
@@ -20,7 +34,8 @@ function GetFlowerScene()
                 "Might come in useful.",
                 Conversion("No", {}, {}),
                 "Probably a wise idea.",
-                GetPitfallInitialScene, nil)
+                GetPitfallInitialScene, nil,
+                gainItemSound, nil)
 end
 
 function _afterPitfallScene()
@@ -35,8 +50,8 @@ function MeetWizardScene()
                 "\"Thanks for the purchase!\"",
                 Conversion("No", {}, {}),
                 "\"Well, your loss.\"",
-                GetBanditAttackInitialScene, nil)
-                --GetFairyInitialScene, nil)
+                GetBanditAttackInitialScene, nil,
+                gainItemSound, nil)
 end
 
 function _afterBanditAttackScene()
@@ -68,7 +83,9 @@ function GetEndingScene()
                 "Good luck!",
                 nil,
                 "",
-                GetInitialScene, nil)
+                GetInitialScene, nil,
+                nil, nil,
+                winSound)
 
 end
 
@@ -83,7 +100,8 @@ function GetDeathScene()
                 "You can learn from each death.\nGood luck!",
                 nil,
                 nil,
-                GetInitialScene, nil)
+                GetInitialScene, nil,
+                loseSound)
 end
 
 function GetTestScene() 

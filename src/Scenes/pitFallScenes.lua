@@ -17,7 +17,8 @@ function PitfallScene1()
                 "Oh nice, very pretty! Wait, what is that sound ...?",
                 Conversion("No", {}, {}),
                 "I wonder what that was?",
-                PitfallScene2, _afterPitfallScene)
+                PitfallScene2, _afterPitfallScene,
+                gainItemSound, nil)
 end
 
 function PitfallScene2()
@@ -28,7 +29,8 @@ function PitfallScene2()
                 "That was painful. The pit is too high to climb back up. This cave seems to be the only way.",
                 Conversion("Nothing\nto lose", {}, {}, function() return not BagHasItems() end),
                 "You had nothing to lose.",
-                PitfallScene3, nil)
+                PitfallScene3, nil,
+                nil, nil)
 end
 
 function PitfallScene3()
@@ -39,7 +41,8 @@ function PitfallScene3()
                 "Delicious! With renewed energy you continue through the cave.",
                 Conversion("Eat nothing", {}, {}),
                 "You keep getting more and more hungry, but cannot find a way out...",
-                PitfallScene4, GetDeathScene)
+                PitfallScene4, GetDeathScene,
+                nil, nil)
 end
 
 function PitfallScene4()
@@ -50,7 +53,8 @@ function PitfallScene4()
                 "It' so pretty!",
                 Conversion("Leave it", {}, {}),
                 "That seems risky. Let's not.",
-                ExitPitfallScene, nil)
+                ExitPitfallScene, nil,
+                superGainItemSound, nil)
 end
 
 function ExitPitfallScene()
@@ -61,5 +65,6 @@ function ExitPitfallScene()
                 "Nice to be out in the sun again.",
                 nil,
                 "",
-                _afterPitfallScene, nil)
+                _afterPitfallScene, nil,
+                nil, nil)
 end

@@ -12,7 +12,8 @@ function GetCityScene1()
                 "You make your way to the commercial district.",
                 Conversion("No", {}, {}),
                 "You start looking for a place to stay.",
-                GetCityScene_market1, GetCityScene_tavern1)
+                GetCityScene_market1, GetCityScene_tavern1,
+                nil, nil)
 end
 
 function GetCityScene_market1()
@@ -23,7 +24,8 @@ function GetCityScene_market1()
                 "\"Thank you your purchase!\"",
                 Conversion("Nothing", {}, {}),
                 "You continue to the next shop.",
-                GetCityScene_market2, nil)
+                GetCityScene_market2, nil,
+                gainItemSound, nil)
 end
 
 function GetCityScene_market2()
@@ -34,7 +36,8 @@ function GetCityScene_market2()
                 "\"Happy doing business with you!\"",
                 Conversion("No", {}, {}),
                 "\"Very well.\"",
-                GetCityScene_market3, nil)
+                GetCityScene_market3, nil,
+                gainItemSound, nil)
 end
 
 function GetCityScene_market3()
@@ -45,7 +48,8 @@ function GetCityScene_market3()
                 "\"Have a nice day!\"\nYou walk to the next shop.",
                 Conversion("Big gem?", {}, {}, function() return BagHasType(ItemTypes.bigGem) end),
                 "\"Oh, what a beautiful gem! This is!\"",
-                GetCityScene_tavern1, GetCityScene_market4)
+                GetCityScene_tavern1, GetCityScene_market4,
+                nil, nil)
 end
 
 function GetCityScene_market4()
@@ -56,7 +60,8 @@ function GetCityScene_market4()
                 "\"Oh, marvellous! Here is one gold pouch.\"",
                 Conversion("No", {}, {}),
                 "The jeweller\'s eyes follow the gem longingly as you walk out of the shop.",
-                GetCityScene_market5, GetCityScene_tavern1)
+                GetCityScene_market5, GetCityScene_tavern1,
+                gainItemSound, nil)
 end
 
 function _putGoldInStorage()
@@ -73,6 +78,8 @@ function GetCityScene_market5()
                 nil,
                 nil,
                 GetCityScene_market6, nil,
+                nil, nil,
+                gainItemSound,
                 function() _putGoldInStorage() end)
 end
 
@@ -85,6 +92,8 @@ function GetCityScene_market6()
                 nil,
                 nil,
                 GetCityScene_tavern1, nil,
+                nil, nil,
+                gainItemSound,
                 function() _putGoldInStorage() end)
 end
 
@@ -96,7 +105,8 @@ function GetCityScene_tavern1()
                 "You have a calm night at the tavern.",
                 Conversion("Outside", {}, {}),
                 "You find a nice sheltered corner and fall asleep under the stars.",
-                GetCityScene_leaving, GetCityScene_outside1)
+                GetCityScene_leaving, GetCityScene_outside1,
+                nil, nil)
 end
 
 function GetCityScene_outside1()
@@ -107,7 +117,8 @@ function GetCityScene_outside1()
                 "\"Wise choice friend\", they say as they slip away into the night. You have an uncomfortable rest of the night.",
                 Conversion("No", {}, {}),
                 "You refuse and try to break free from the knife at your throat.",
-                GetCityScene_leaving, GetCityScene_outside2)
+                GetCityScene_leaving, GetCityScene_outside2,
+                nil, nil)
 end
 function GetCityScene_outside2()
     return Scene(nil,
@@ -117,7 +128,8 @@ function GetCityScene_outside2()
                 "In the struggle you cut down the thief. Now that you have a better look they seem very poor. They also have nothing of value.",
                 Conversion("Empty handed", {}, {}),
                 "There is a struggle and you feel the knife cut you in your chest. Slowly your consciousness starts to fade...",
-                GetCityScene_leaving, GetDeathScene)
+                GetCityScene_leaving, GetDeathScene,
+                nil, nil)
 end
 
 function GetCityScene_leaving()
@@ -128,5 +140,6 @@ function GetCityScene_leaving()
                 "Early in the morning you head out again, into the second leg of your journey.",
                 nil,
                 nil,
-                _afterCityScene, nil)
+                _afterCityScene, nil,
+                nil, nil)
 end
