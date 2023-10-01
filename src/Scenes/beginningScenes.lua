@@ -42,7 +42,7 @@ function GetBeginningScene4()
     return Scene(nil,
                 "As you walk through town your nose picks up the smells from the backery. Might be nice to but some bread?\nMove an item from your bag onto an option below to use it.",
                 "",
-                Conversion("Buy bread\nSpend money", {ItemTypes.money}, {NewBreadItem}),
+                Conversion("Buy bread", {ItemTypes.money}, {NewBreadItem}),
                 "Delicious!",
                 Conversion("Don't buy\nbread", {}, {}),
                 "Better save the money.",

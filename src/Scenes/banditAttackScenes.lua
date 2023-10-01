@@ -19,7 +19,7 @@ function GetBanditAttackScene2()
     return Scene(Sprites.CharacterFrameForest,
                 "There is a group of bandits attacking a carriage. Now they are coming for you!",
                 "You will have to fight.",
-                Conversion("With a weapon", {ItemTypes.weapon}, {NewGoldItem}),
+                Conversion("Draw a weapon", {ItemTypes.weapon}, {NewGoldItem}),
                 "Take that bandits!",
                 Conversion("Bare handed", {}, {}),
                 "That did not go so well ...",

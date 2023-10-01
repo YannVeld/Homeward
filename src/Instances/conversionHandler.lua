@@ -16,11 +16,16 @@ ConversionHandler = Class{
     end,
 
     createOptionButtons = function(self)
-        local button1pos = Vector(22, 72)
-        local button2pos = Vector(85, 72)
+        --local button1pos = Vector(22, 72)
+        --local button2pos = Vector(85, 72)
+        local button1pos = Vector(22, 95)
+        local button2pos = Vector(85, 95)
 
-        local buttonwidth = Sprites.OptionButton:getWidth()
-        local buttonheight = Sprites.OptionButton:getHeight()
+
+        --local buttonwidth = Sprites.OptionButton:getWidth()
+        --local buttonheight = Sprites.OptionButton:getHeight()
+        local buttonwidth = Sprites.ContinueButton:getWidth()
+        local buttonheight = Sprites.ContinueButton:getHeight()
 
         local textColor = Colors.hexToRGB("#4B3D44")
 
@@ -28,7 +33,8 @@ ConversionHandler = Class{
             OptionButton1 = Button(button1pos, buttonwidth, buttonheight)
             OptionButton1:setText(self.conversion1.description, {color=textColor, ha="center", va="top"})
             OptionButton1:setOnButtonReleased(function() self:performConversion(self.conversion1, 1) end)
-            OptionButton1:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
+            --OptionButton1:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
+            OptionButton1:setBackgroundSprites(Sprites.ContinueButton, Sprites.ContinueButtonHover, Sprites.ContinueButton, false)
             OptionButton1:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
             OptionButton1:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
             OptionButton1:setDrawLayer(DrawLayers.Normal)
@@ -38,7 +44,8 @@ ConversionHandler = Class{
             OptionButton2 = Button(button2pos, buttonwidth, buttonheight)
             OptionButton2:setText(self.conversion2.description, {color=textColor, ha="center", va="top"})
             OptionButton2:setOnButtonReleased(function() self:performConversion(self.conversion2, 2) end)
-            OptionButton2:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
+            --OptionButton2:setBackgroundSprites(Sprites.OptionButton, Sprites.OptionButtonHover, Sprites.OptionButton, false)
+            OptionButton2:setBackgroundSprites(Sprites.ContinueButton, Sprites.ContinueButtonHover, Sprites.ContinueButton, false)
             OptionButton2:setOnButtonHoverStart(function() self.pickupManager:setItemLock(true) end)
             OptionButton2:setOnButtonHoverEnd(function() self.pickupManager:setItemLock(false) end)
             OptionButton2:setDrawLayer(DrawLayers.Normal)

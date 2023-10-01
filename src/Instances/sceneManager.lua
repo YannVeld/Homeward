@@ -20,7 +20,8 @@ SceneManager = Class{
         self.storyTextMaxX = 144
         self.storyText = ""
 
-        self.questionTextPosition = Vector(13, 55)
+        --self.questionTextPosition = Vector(13, 55)
+        self.questionTextPosition = Vector(13, 75)
         self.questionText = ""
 
         self.continueButtonPos = Vector(79 - Sprites.ContinueButton:getWidth()/2, 95)
