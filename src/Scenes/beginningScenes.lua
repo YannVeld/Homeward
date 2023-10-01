@@ -50,7 +50,7 @@ function GetBeginningScene4()
 end
 
 NewOldLadyItem = function(position, pickupManager, grid, itemStorage)
-    local fn = Lume.randomchoice({NewSwordItem, NewRandomPotion, NewRingItem, NewGoldItem, NewRedGemItem})
+    local fn = Lume.randomchoice({NewRandomWeapon, NewRandomPotion, NewRingItem, NewGoldItem, NewRedGemItem, NewFruitItem})
     return fn(position, pickupManager, grid, itemStorage)
 end
 

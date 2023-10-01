@@ -57,9 +57,9 @@ Item = Class{
         if button == 1 then
             self:onLeftClick(x, y, istouch, presses)
         end
-        if button == 2 then
-            self:onRightClick(x, y, istouch, presses)
-        end
+        --if button == 2 then
+        --    self:onRightClick(x, y, istouch, presses)
+        --end
     end,
 
     destroy = function(self)

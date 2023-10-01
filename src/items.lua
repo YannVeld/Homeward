@@ -92,17 +92,17 @@ NewRedGemItem = function(position, pickupManager, grid, itemStorage)
     local value = 15
     local shape = {{0,0}}
     local basecell = 1
-    local types = {ItemTypes.treasure}
+    local types = {ItemTypes.treasure, ItemTypes.gem}
     item = Item(name, value, position, Sprites["1x1itemsGemRed"], Sprites["1x1itemsTreasure"], Sprites["1x1itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
 
 NewGreenGemItem = function(position, pickupManager, grid, itemStorage)
     local name = "Green Gem"
-    local value = 40
+    local value = 60
     local shape = {{0,0}, {0,1}, {1,0}, {1,1}}
     local basecell = 1
-    local types = {ItemTypes.treasure}
+    local types = {ItemTypes.treasure, ItemTypes.gem}
     item = Item(name, value, position, Sprites["2x2itemsGemGreen"], Sprites["2x2itemsTreasure"], Sprites["2x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
@@ -122,6 +122,15 @@ NewBoneItem = function(position, pickupManager, grid, itemStorage)
     return item
 end
 
+NewFlowerItem = function(position, pickupManager, grid, itemStorage)
+    local name = "Flower"
+    local value = 25
+    local shape = {{0,0}, {0,1}}
+    local basecell = 1
+    local types = {ItemTypes.treasure}
+    item = Item(name, value, position, Sprites["1x2itemsFlower"], Sprites["1x2itemsTreasure"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
+    return item
+end
 
 -- Food
 
@@ -185,7 +194,7 @@ NewPotionRedItem = function(position, pickupManager, grid, itemStorage)
     local value = 25
     local shape = {{0,0}, {0,1}}
     local basecell = 1
-    local types = {ItemTypes.food}
+    local types = {ItemTypes.food, ItemTypes.potion}
     item = Item(name, value, position, Sprites["1x2itemsPotionRed"], Sprites["1x2itemsFood"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
@@ -195,7 +204,7 @@ NewPotionBlueItem = function(position, pickupManager, grid, itemStorage)
     local value = 25
     local shape = {{0,0}, {0,1}}
     local basecell = 1
-    local types = {ItemTypes.food}
+    local types = {ItemTypes.food, ItemTypes.potion}
     item = Item(name, value, position, Sprites["1x2itemsPotionBlue"], Sprites["1x2itemsFood"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end
@@ -205,7 +214,7 @@ NewPotionGreenItem = function(position, pickupManager, grid, itemStorage)
     local value = 25
     local shape = {{0,0}, {0,1}}
     local basecell = 1
-    local types = {ItemTypes.food}
+    local types = {ItemTypes.food, ItemTypes.potion}
     item = Item(name, value, position, Sprites["1x2itemsPotionGreen"], Sprites["1x2itemsFood"], Sprites["1x2itemsHighlight"], shape, basecell, types, pickupManager, grid, itemStorage)
     return item
 end

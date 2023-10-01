@@ -50,7 +50,23 @@ function gamestates.thegame:draw()
     --myGrid:draw()
 end
 
-GetTotalBagValue = function(self)
+GetAllItemsInBag = function()
+    local objs = {}
+
+    for i=1, myGrid.cellsWide do
+        for j=1, myGrid.cellsHigh do
+            local obj = myGrid:getContent(i,j)
+            if obj then
+                if not Lume.find(objs, obj) then
+                    table.insert(objs, obj)
+                end
+            end
+        end
+    end
+    return objs
+end
+
+GetTotalBagValue = function()
     local totalValue = 0
 
     local countedObjs = {}

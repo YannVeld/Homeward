@@ -40,11 +40,11 @@ end
 
 function GetBanditAttackScene3_loss()
     return Scene(Sprites.CharacterFrameForest,
-                "Luckily all they take is some gold",
-                "Lose gold",
-                Conversion("Gold", {ItemTypes.money}, {}),
+                "Luckily all they take is valuables. No lives.",
+                "Lose some valueable item:",
+                Conversion("Lose item", {ItemTypes.money, ItemTypes.treasure}, {}),
                 "That was scary.",
                 Conversion("Nothing", {}, {}, function() return not BagHasType(ItemTypes.money) end),
-                "You had nothing of interest.",
+                "You had nothing of interest to give them.",
                 _afterBanditAttackScene, nil)
 end

@@ -1,5 +1,5 @@
 
-ItemTypes = {weapon="Weapon", money="Money", food="Food", treasure="Treasure", mushroom="Mushroom"}
+ItemTypes = {weapon="Weapon", money="Money", food="Food", treasure="Treasure", mushroom="Mushroom", potion="Potion", gem="Gem"}
 
 AllItemTypes = {ItemTypes.weapon, ItemTypes.money, ItemTypes.food, ItemTypes.treasure}
 

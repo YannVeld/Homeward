@@ -24,7 +24,19 @@ function GetFlowerScene()
 end
 
 function _afterPitfallScene()
-    return GetBanditAttackInitialScene()
+    return MeetWizardScene()
+end
+
+function MeetWizardScene()
+    return Scene(Sprites.CharacterFrameForest,
+                "\"Hello, you!\", you hear from behind you. You turn to see a woman in robes and a pointy hat walking towards you.",
+                "Could I interest you in a potion?",
+                Conversion("Buy potion", {ItemTypes.money}, {NewRandomPotion}),
+                "\"Thanks for the purchase!\"",
+                Conversion("No", {}, {}),
+                "\"Well, your loss.\"",
+                GetBanditAttackInitialScene, nil)
+                --GetFairyInitialScene, nil)
 end
 
 function _afterBanditAttackScene()
@@ -32,8 +44,29 @@ function _afterBanditAttackScene()
 end
 
 function _afterAbondonnedCastleScene()
+    return GetFairyScene1()
+end
+
+function _afterFairyScene()
     return GetEndingScene()
 end
+
+
+
+function GetEndingScene()
+    return Scene(Sprites.CharacterFrameForest,
+                "That is the entire story so far unfortunately.",
+                "Continue from beginning?",
+                Conversion("Yes", {}, {}),
+                "Good luck!",
+                nil,
+                "",
+                GetInitialScene, nil)
+
+end
+
+
+
 
 function GetDeathScene()
     return Scene(Sprites.CharacterFrameDeath,
@@ -68,15 +101,3 @@ end
 --                GetFlowerScene, nil)
 --end
 
-
-function GetEndingScene()
-    return Scene(Sprites.CharacterFrameForest,
-                "That is the entire story so far unfortunately.",
-                "Continue from beginning?",
-                Conversion("Yes", {}, {}),
-                "Good luck!",
-                nil,
-                "",
-                GetInitialScene, nil)
-
-end
