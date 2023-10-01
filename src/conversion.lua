@@ -1,5 +1,5 @@
-require("src/itemTypes")
-require("src/items")
+require("src.itemTypes")
+require("src.items")
 
 Conversion = Class{
     init = function(self, description, inTypes, outItems, condition)

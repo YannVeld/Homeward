@@ -1,7 +1,7 @@
 require("Packages")
 require("Sprites")
 require("Fonts")
-require("src/GameStates")
+require("src.GameStates")
 require("input")
 
 -- Initialization variables

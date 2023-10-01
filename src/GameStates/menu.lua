@@ -1,4 +1,4 @@
-require("Packages/UI")
+require("Packages.UI")
 
 gamestates.menu = {}
 

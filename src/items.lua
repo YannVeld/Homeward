@@ -1,4 +1,4 @@
-require("src/itemTypes")
+require("src.itemTypes")
 
 
 -- Weapons

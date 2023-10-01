@@ -1,12 +1,12 @@
-require("src/Instances/Item")
-require("src/Instances/itemPickupManager")
-require("src/Instances/conversionHandler")
-require("src/Instances/infoScreenManager")
-require("src/Instances/itemStorage")
-require("src/Instances/sceneManager")
-require("src/Scenes")
+require("src.Instances.Item")
+require("src.Instances.itemPickupManager")
+require("src.Instances.conversionHandler")
+require("src.Instances.infoScreenManager")
+require("src.Instances.itemStorage")
+require("src.Instances.sceneManager")
+require("src.Scenes")
 
-require("src/items")
+require("src.items")
 
 gamestates.thegame = {}
 

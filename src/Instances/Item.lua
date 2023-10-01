@@ -1,5 +1,5 @@
-require("src/Instances/Pickupable")
-require("src/itemTypes")
+require("src.Instances.Pickupable")
+require("src.itemTypes")
 
 Item = Class{
     __includes = {Pickupable},

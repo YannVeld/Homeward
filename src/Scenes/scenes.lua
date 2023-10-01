@@ -1,7 +1,7 @@
-require("src/scene")
-require("src/conversion")
-require("src/itemTypes")
-require("src/items")
+require("src.scene")
+require("src.conversion")
+require("src.itemTypes")
+require("src.items")
 
 function GetInitialScene()
     return GetIntroScene1()

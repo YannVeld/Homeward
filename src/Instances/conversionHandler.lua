@@ -1,4 +1,4 @@
-require("src/conversion")
+require("src.conversion")
 
 ConversionHandler = Class{
     __includes = {Instance},
