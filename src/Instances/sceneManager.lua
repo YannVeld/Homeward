@@ -25,7 +25,8 @@ SceneManager = Class{
         self.questionTextPosition = Vector(13, 75)
         self.questionText = ""
 
-        self.secPerChar = 0.005
+        self.secPerChar = 0.01
+        self.showAllChars = false
         self:resetCharsShown()
 
         self.continueButtonPos = Vector(79 - Sprites.ContinueButton:getWidth()/2, 95)
@@ -37,6 +38,7 @@ SceneManager = Class{
 
     update = function(self, dt)
         self:incrementCharsShown()
+        self:showFullTextOnClick()
         self:setContinueButtonText()
     end,
 
@@ -64,16 +66,31 @@ SceneManager = Class{
     resetCharsShown = function(self)
         self.curCharPos = 0
         self.curQuestionCharPos = 0
+        self.showAllChars = false
         self.startTime = love.timer.getTime()
     end,
 
     incrementCharsShown = function(self)
+        if self.showAllChars then
+            self.curCharPos = 99999999
+            self.curQuestionCharPos = 99999999
+            return
+        end
+
         self.curCharPos = math.floor( (love.timer.getTime() - self.startTime) / self.secPerChar )
 
         self.curQuestionCharPos = self.curCharPos - #self.storyText
         if self.curQuestionCharPos < 0 then
             self.curQuestionCharPos = 0
         end
+    end,
+
+    showFullTextOnClick = function(self)
+        if (not love.keyboard.isDown("space")) and (not love.keyboard.isDown("return")) then
+            return
+        end
+
+        self.showAllChars = true
     end,
 
     setupScene = function(self)
