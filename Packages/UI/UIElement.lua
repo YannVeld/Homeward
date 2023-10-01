@@ -21,7 +21,7 @@ UIElement = Class{
 
         -- Text settings
         self.font = love.graphics.getFont()
-        self.text = love.graphics.newText(self.font, "")
+        self.text = ""
         self.textcolor = Colors.black
         self.textha = "center"
         self.textva = "center"
@@ -62,7 +62,7 @@ UIElement = Class{
             self.font = opts.font
         end
 
-        self.text = love.graphics.newText(self.font, text)
+        self.text = text
 
         if not opts then return end
 
@@ -94,26 +94,30 @@ UIElement = Class{
         return true
     end,
 
-    _getTextxPos = function(self)
+    _getTextxPos = function(self, str)
+        local _text = love.graphics.newText(self.font, str)
+
         if self.textha == "left" then
             return self.position.x
         end
         if self.textha == "right" then
-            return self.position.x + self.width - self.text:getWidth()
+            return self.position.x + self.width - _text:getWidth()
         end
         if self.textha == "center" then
-            return self.position.x - self.text:getWidth() / 2 + self.width / 2
+            return self.position.x - _text:getWidth() / 2 + self.width / 2
         end
     end,
-    _getTextyPos = function(self)
+    _getTextyPos = function(self, str)
+        local _text = love.graphics.newText(self.font, str)
+
         if self.textva == "top" then
             return self.position.y
         end
         if self.textva == "bottom" then
-            return self.position.y + self.height - self.text:getHeight()
+            return self.position.y + self.height - _text:getHeight()
         end
         if self.textva == "center" then
-            return self.position.y - self.text:getHeight() / 2 + self.height / 2
+            return self.position.y - _text:getHeight() / 2 + self.height / 2
         end
     end,
 
@@ -140,9 +144,15 @@ UIElement = Class{
 
         -- Draw text
         love.graphics.setColor(self.textcolor)
-        local xpos = self:_getTextxPos()
-        local ypos = self:_getTextyPos()
-        love.graphics.draw(self.text, xpos, ypos)
+
+        local font = love.graphics.getFont()
+        local width, wrapped = font:getWrap(self.text, self.width)
+        for i,line in ipairs(wrapped) do
+            local xpos = self:_getTextxPos(line)
+            local ypos = self:_getTextyPos(line)
+            love.graphics.print(line, xpos, ypos + (i-1) * font:getLineHeight() * font:getHeight())
+        end
+
         love.graphics.setColor(Colors.white)
     end,
 
